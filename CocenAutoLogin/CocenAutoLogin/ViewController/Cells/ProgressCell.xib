@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProgressCell" id="4Jy-U2-tk4" userLabel="ProgressCell" customClass="ProgressCell" customModule="CocenAutoLogin" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="504" height="173"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Tsq-iI-Pco">
+                <rect key="frame" x="0.0" y="0.0" width="504" height="173"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rYV-pq-NER" customClass="StepIndicatorView" customModule="StepIndicator">
+                        <rect key="frame" x="20" y="0.0" width="464" height="113"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="numberOfSteps">
+                                <integer key="value" value="3"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="currentStep">
+                                <integer key="value" value="0"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="준비 중..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SrO-04-I05">
+                        <rect key="frame" x="221" y="113" width="62.333333333333314" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="dTw-aT-fHm"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="rYV-pq-NER" secondAttribute="trailing" constant="20" id="1JT-hZ-uRO"/>
+                    <constraint firstItem="SrO-04-I05" firstAttribute="top" secondItem="rYV-pq-NER" secondAttribute="bottom" id="49W-EL-EEr"/>
+                    <constraint firstAttribute="bottom" secondItem="SrO-04-I05" secondAttribute="bottom" id="NLh-oi-VOE"/>
+                    <constraint firstItem="rYV-pq-NER" firstAttribute="leading" secondItem="Tsq-iI-Pco" secondAttribute="leading" constant="20" id="eel-Jc-dS9"/>
+                    <constraint firstItem="SrO-04-I05" firstAttribute="centerX" secondItem="Tsq-iI-Pco" secondAttribute="centerX" id="ob7-3x-kIS"/>
+                    <constraint firstItem="rYV-pq-NER" firstAttribute="top" secondItem="Tsq-iI-Pco" secondAttribute="top" id="sYu-hD-9yI"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="504" height="173"/>
+            <connections>
+                <outlet property="descLabel" destination="SrO-04-I05" id="8FP-Ug-nn0"/>
+                <outlet property="stepIndicatorView" destination="rYV-pq-NER" id="am2-gh-bdD"/>
+            </connections>
+            <point key="canvasLocation" x="67.200000000000003" y="247.16748768472908"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="OtpFailCell" id="4Jy-U2-tk4" userLabel="OtpFailCell" customClass="OtpFailCell" customModule="CocenAutoLogin" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="207"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Tsq-iI-Pco">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="207"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OTP Fail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmD-t4-Zoc">
+                        <rect key="frame" x="173" y="62" width="68.333333333333314" height="21"/>
+                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exclamationmark.triangle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="6vj-Qa-R1z">
+                        <rect key="frame" x="157" y="86" width="100" height="97.666666666666686"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="100" id="1hr-fA-l8n"/>
+                            <constraint firstAttribute="width" constant="100" id="Hr7-YG-HFE"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="6vj-Qa-R1z" firstAttribute="centerX" secondItem="Tsq-iI-Pco" secondAttribute="centerX" id="Rwg-L3-hvQ"/>
+                    <constraint firstItem="6vj-Qa-R1z" firstAttribute="centerY" secondItem="Tsq-iI-Pco" secondAttribute="centerY" multiplier="1.3" id="hu8-T3-gFF"/>
+                    <constraint firstItem="wmD-t4-Zoc" firstAttribute="centerX" secondItem="Tsq-iI-Pco" secondAttribute="centerX" id="n2G-KD-qTS"/>
+                    <constraint firstItem="wmD-t4-Zoc" firstAttribute="centerY" secondItem="Tsq-iI-Pco" secondAttribute="centerY" multiplier="0.7" id="ptw-Uw-gGd"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="414" height="207"/>
+            <connections>
+                <outlet property="msgLabel" destination="wmD-t4-Zoc" id="wE1-px-wNa"/>
+            </connections>
+            <point key="canvasLocation" x="-4.7999999999999998" y="259.72906403940885"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="exclamationmark.triangle" catalog="system" width="128" height="112"/>
+    </resources>
+</document>

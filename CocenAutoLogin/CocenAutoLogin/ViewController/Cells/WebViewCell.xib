@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WebViewCell" id="4Jy-U2-tk4" userLabel="WebViewCell" customClass="WebViewCell" customModule="CocenAutoLogin" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Tsq-iI-Pco">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Uu-Gm-C57">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                        <wkWebViewConfiguration key="configuration">
+                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                            <wkPreferences key="preferences"/>
+                        </wkWebViewConfiguration>
+                    </wkWebView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="2Uu-Gm-C57" secondAttribute="trailing" id="0ae-fS-MzG"/>
+                    <constraint firstItem="2Uu-Gm-C57" firstAttribute="top" secondItem="Tsq-iI-Pco" secondAttribute="top" id="WSA-XD-xDk"/>
+                    <constraint firstItem="2Uu-Gm-C57" firstAttribute="leading" secondItem="Tsq-iI-Pco" secondAttribute="leading" id="dXG-5O-t9V"/>
+                    <constraint firstAttribute="bottom" secondItem="2Uu-Gm-C57" secondAttribute="bottom" id="fFR-Xe-JO7"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <connections>
+                <outlet property="webView" destination="2Uu-Gm-C57" id="JG1-np-Nbg"/>
+            </connections>
+            <point key="canvasLocation" x="-35" y="202"/>
+        </collectionViewCell>
+    </objects>
+</document>

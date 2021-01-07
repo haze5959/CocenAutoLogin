@@ -6,7 +6,7 @@
 //  Copyright © 2020 OQ. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// 뷰모델 공통 타입
 protocol ViewModelType {
@@ -17,7 +17,7 @@ protocol ViewModelType {
     var input: Input { get }
     
     /// Output 변환
-    func transform(input: Input) -> Output
+    func transform() -> Output
 }
 
 /// 뷰 공통 인터페이스
@@ -35,4 +35,11 @@ extension CommonView {
         bindings()
         setupView()
     }
+}
+
+/// 콜랙션뷰 섹션 공통 인터페이스
+protocol Section {
+    var numberOfItems: Int { get }
+    func layoutSection() -> NSCollectionLayoutSection
+    func configureCell(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell
 }

@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C313A919259B194800FC7A62 /* OQUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C313A918259B194800FC7A62 /* OQUserDefaults.swift */; };
+		C375D23325A6A7930094F473 /* ProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375D22925A6A7930094F473 /* ProgressCell.swift */; };
+		C375D23425A6A7940094F473 /* SuccessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375D22A25A6A7930094F473 /* SuccessCell.swift */; };
+		C375D23525A6A7940094F473 /* GuideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C375D22B25A6A7930094F473 /* GuideCell.xib */; };
+		C375D23625A6A7940094F473 /* WebViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375D22C25A6A7930094F473 /* WebViewCell.swift */; };
+		C375D23725A6A7940094F473 /* WebViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C375D22D25A6A7930094F473 /* WebViewCell.xib */; };
+		C375D23825A6A7940094F473 /* GuideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375D22E25A6A7930094F473 /* GuideCell.swift */; };
+		C375D23925A6A7940094F473 /* SuccessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C375D22F25A6A7930094F473 /* SuccessCell.xib */; };
+		C375D23A25A6A7940094F473 /* OtpFailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C375D23025A6A7930094F473 /* OtpFailCell.xib */; };
+		C375D23B25A6A7940094F473 /* OtpFailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375D23125A6A7930094F473 /* OtpFailCell.swift */; };
+		C375D23C25A6A7940094F473 /* ProgressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C375D23225A6A7930094F473 /* ProgressCell.xib */; };
+		C375D24125A6AA2A0094F473 /* OtpEtcCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C375D23F25A6AA2A0094F473 /* OtpEtcCell.xib */; };
+		C375D24225A6AA2A0094F473 /* OtpEtcCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375D24025A6AA2A0094F473 /* OtpEtcCell.swift */; };
+		C375D24625A6D5C80094F473 /* StepIndicator in Frameworks */ = {isa = PBXBuildFile; productRef = C375D24525A6D5C80094F473 /* StepIndicator */; };
 		C3C198B22593196A007029E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C198B12593196A007029E0 /* AppDelegate.swift */; };
 		C3C198B42593196A007029E0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C198B32593196A007029E0 /* SceneDelegate.swift */; };
 		C3C198B62593196A007029E0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C198B52593196A007029E0 /* MainViewController.swift */; };
@@ -22,6 +36,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C313A918259B194800FC7A62 /* OQUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OQUserDefaults.swift; sourceTree = "<group>"; };
+		C375D22925A6A7930094F473 /* ProgressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressCell.swift; sourceTree = "<group>"; };
+		C375D22A25A6A7930094F473 /* SuccessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessCell.swift; sourceTree = "<group>"; };
+		C375D22B25A6A7930094F473 /* GuideCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuideCell.xib; sourceTree = "<group>"; };
+		C375D22C25A6A7930094F473 /* WebViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewCell.swift; sourceTree = "<group>"; };
+		C375D22D25A6A7930094F473 /* WebViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewCell.xib; sourceTree = "<group>"; };
+		C375D22E25A6A7930094F473 /* GuideCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideCell.swift; sourceTree = "<group>"; };
+		C375D22F25A6A7930094F473 /* SuccessCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuccessCell.xib; sourceTree = "<group>"; };
+		C375D23025A6A7930094F473 /* OtpFailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtpFailCell.xib; sourceTree = "<group>"; };
+		C375D23125A6A7930094F473 /* OtpFailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtpFailCell.swift; sourceTree = "<group>"; };
+		C375D23225A6A7930094F473 /* ProgressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressCell.xib; sourceTree = "<group>"; };
+		C375D23F25A6AA2A0094F473 /* OtpEtcCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtpEtcCell.xib; sourceTree = "<group>"; };
+		C375D24025A6AA2A0094F473 /* OtpEtcCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtpEtcCell.swift; sourceTree = "<group>"; };
 		C3C198AE2593196A007029E0 /* CocenAutoLogin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocenAutoLogin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3C198B12593196A007029E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3C198B32593196A007029E0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C375D24625A6D5C80094F473 /* StepIndicator in Frameworks */,
 				C3C198F325933BEB007029E0 /* SwiftOTP in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -50,6 +78,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C375D22525A6A3C40094F473 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C375D24025A6AA2A0094F473 /* OtpEtcCell.swift */,
+				C375D23F25A6AA2A0094F473 /* OtpEtcCell.xib */,
+				C375D22E25A6A7930094F473 /* GuideCell.swift */,
+				C375D22B25A6A7930094F473 /* GuideCell.xib */,
+				C375D23125A6A7930094F473 /* OtpFailCell.swift */,
+				C375D23025A6A7930094F473 /* OtpFailCell.xib */,
+				C375D22925A6A7930094F473 /* ProgressCell.swift */,
+				C375D23225A6A7930094F473 /* ProgressCell.xib */,
+				C375D22A25A6A7930094F473 /* SuccessCell.swift */,
+				C375D22F25A6A7930094F473 /* SuccessCell.xib */,
+				C375D22C25A6A7930094F473 /* WebViewCell.swift */,
+				C375D22D25A6A7930094F473 /* WebViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		C3C198A52593196A007029E0 = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +137,7 @@
 				C3C198FA25934142007029E0 /* Extensions */,
 				C3C198F72593405E007029E0 /* AppError.swift */,
 				C3C198E725932D8B007029E0 /* Protocols.swift */,
+				C313A918259B194800FC7A62 /* OQUserDefaults.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -105,6 +153,7 @@
 		C3C198EB25932DBB007029E0 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				C375D22525A6A3C40094F473 /* Cells */,
 				C3C198B52593196A007029E0 /* MainViewController.swift */,
 			);
 			path = ViewController;
@@ -144,6 +193,7 @@
 			name = CocenAutoLogin;
 			packageProductDependencies = (
 				C3C198F225933BEB007029E0 /* SwiftOTP */,
+				C375D24525A6D5C80094F473 /* StepIndicator */,
 			);
 			productName = CocenAutoLogin;
 			productReference = C3C198AE2593196A007029E0 /* CocenAutoLogin.app */;
@@ -174,6 +224,7 @@
 			mainGroup = C3C198A52593196A007029E0;
 			packageReferences = (
 				C3C198F125933BEB007029E0 /* XCRemoteSwiftPackageReference "SwiftOTP" */,
+				C375D24425A6D5C80094F473 /* XCRemoteSwiftPackageReference "StepIndicator" */,
 			);
 			productRefGroup = C3C198AF2593196A007029E0 /* Products */;
 			projectDirPath = "";
@@ -189,8 +240,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C375D23525A6A7940094F473 /* GuideCell.xib in Resources */,
+				C375D23C25A6A7940094F473 /* ProgressCell.xib in Resources */,
+				C375D23925A6A7940094F473 /* SuccessCell.xib in Resources */,
+				C375D23A25A6A7940094F473 /* OtpFailCell.xib in Resources */,
+				C375D23725A6A7940094F473 /* WebViewCell.xib in Resources */,
 				C3C198BE2593196C007029E0 /* LaunchScreen.storyboard in Resources */,
 				C3C198BB2593196C007029E0 /* Assets.xcassets in Resources */,
+				C375D24125A6AA2A0094F473 /* OtpEtcCell.xib in Resources */,
 				C3C198B92593196A007029E0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -203,12 +260,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3C198EF25932E07007029E0 /* MainViewModel.swift in Sources */,
+				C375D23625A6A7940094F473 /* WebViewCell.swift in Sources */,
+				C375D24225A6AA2A0094F473 /* OtpEtcCell.swift in Sources */,
 				C3C199032593448E007029E0 /* AppProcessModel.swift in Sources */,
 				C3C198FC25934142007029E0 /* OQ+Publisher.swift in Sources */,
+				C375D23325A6A7930094F473 /* ProgressCell.swift in Sources */,
+				C375D23B25A6A7940094F473 /* OtpFailCell.swift in Sources */,
 				C3C198B62593196A007029E0 /* MainViewController.swift in Sources */,
 				C3C198F82593405E007029E0 /* AppError.swift in Sources */,
 				C3C198B22593196A007029E0 /* AppDelegate.swift in Sources */,
+				C375D23425A6A7940094F473 /* SuccessCell.swift in Sources */,
 				C3C198B42593196A007029E0 /* SceneDelegate.swift in Sources */,
+				C375D23825A6A7940094F473 /* GuideCell.swift in Sources */,
+				C313A919259B194800FC7A62 /* OQUserDefaults.swift in Sources */,
 				C3C198E825932D8B007029E0 /* Protocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +481,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C375D24425A6D5C80094F473 /* XCRemoteSwiftPackageReference "StepIndicator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/chenyun122/StepIndicator.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.9;
+			};
+		};
 		C3C198F125933BEB007029E0 /* XCRemoteSwiftPackageReference "SwiftOTP" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/lachlanbell/SwiftOTP.git";
@@ -428,6 +500,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C375D24525A6D5C80094F473 /* StepIndicator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C375D24425A6D5C80094F473 /* XCRemoteSwiftPackageReference "StepIndicator" */;
+			productName = StepIndicator;
+		};
 		C3C198F225933BEB007029E0 /* SwiftOTP */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C3C198F125933BEB007029E0 /* XCRemoteSwiftPackageReference "SwiftOTP" */;
