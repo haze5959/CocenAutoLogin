@@ -14,6 +14,18 @@ final class MainViewController: UIViewController, CommonView {
     private lazy var viewModel = MainViewModel()
     private var cancellables = Set<AnyCancellable>()
     
+    lazy var barSettingBtn: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "gear"), for: .normal)
+        
+        return button
+    }()
+    
+    let sideMenuView: SideMenuView = {
+        let view = SideMenuView.instanceFromNib() as! SideMenuView
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,7 +48,7 @@ final class MainViewController: UIViewController, CommonView {
             .assign(to: \.collectionView.collectionViewLayout, on: self)
             .store(in: &self.cancellables)
         
-        output.appProcessValue
+        output.appProcessAction
             .sink { [weak self] process in
                 self?.collectionView.reloadData()
                 
@@ -68,15 +80,26 @@ final class MainViewController: UIViewController, CommonView {
                 self?.viewModel.input.appProcess.send(.failOTP(msg: error.localizedDescription))
             }
         }.store(in: &self.cancellables)
+        
+        barSettingBtn
+            .publisher(for: .touchUpInside)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] _ in
+                self?.sideMenuView.toggle()
+            })
+            .store(in: &self.cancellables)
     }
     
     func setupView() {
-        OQUserDefaults().setValue("UGBDJEC2CQHPXKMK", forKey: .otpKey)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: barSettingBtn)
         
+        view.addSubview(sideMenuView)
+        
+        // OTP 키가 저장 되어있다면 바로 연결 진행
         if let key = OQUserDefaults().object(forKey: .otpKey) as? String {
             viewModel.input.optKey.send(key)
         } else {
-            viewModel.input.appProcess.send(.initPage)
+            viewModel.input.appProcess.send(.initPage(submitSub: viewModel.input.otpKeySubmit))
         }
     }
 }
@@ -105,7 +128,7 @@ extension MainViewController {
     
     func authView() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
-            viewModel.input.appProcess.send(.success(retryPub: viewModel.input.retry))
+            viewModel.input.appProcess.send(.success(retrySub: viewModel.input.retry))
         }
     }
     

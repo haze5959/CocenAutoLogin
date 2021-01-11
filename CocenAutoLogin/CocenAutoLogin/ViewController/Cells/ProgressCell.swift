@@ -16,11 +16,11 @@ class ProgressCell: UICollectionViewCell {
         didSet {
             switch process {
             case .connectWifi:
-                self.stepIndicatorView.currentStep = 0
+                stepIndicatorView.currentStep = 0
             case .loadAuthPage:
-                self.stepIndicatorView.currentStep = 1
+                stepIndicatorView.currentStep = 1
             case .auth:
-                self.stepIndicatorView.currentStep = 2
+                stepIndicatorView.currentStep = 2
             default:
                 break
             }
@@ -29,8 +29,18 @@ class ProgressCell: UICollectionViewCell {
         }
     }
     
+    override func layoutSubviews() {
+        UIView.animate(withDuration: 1.0,
+                       delay: 0.0,
+                       options: [.autoreverse ,.repeat],
+                       animations: { [self] () -> Void in
+                        descLabel.alpha = 0.2
+                        
+                       })
+    }
+    
     override func prepareForReuse() {
-        self.stepIndicatorView.currentStep = 0
+        stepIndicatorView.currentStep = 0
     }
 }
 

@@ -6,23 +6,35 @@
 //
 
 import UIKit
+import Combine
 
 class GuideCell: UICollectionViewCell {
     @IBOutlet private var titleLabel: UILabel!
-
-    var title: String? {
-        didSet {
-            titleLabel.text = title
+    @IBOutlet weak var textField: UITextField!
+    
+    var submitSub: PassthroughSubject<String, Never>?
+    
+    @IBAction func pressSubmitBtn(_ sender: Any) {
+        guard let otpKey = textField.text else {
+            titleLabel.text = "OTP Key가 입력되지 않았습니다."
+            return
         }
+        
+        guard otpKey.count == 16 else {
+            titleLabel.text = "OTP Key는 16자리 입니다."
+            return
+        }
+        
+        submitSub?.send(otpKey)
     }
 }
 
 struct GuideSection: Section {
     let numberOfItems = 1
-    private let title: String
+    var submitSub: PassthroughSubject<String, Never>
 
-    init() {
-        self.title = "test"
+    init(submitSub: PassthroughSubject<String, Never>) {
+        self.submitSub = submitSub
     }
 
     func layoutSection() -> NSCollectionLayoutSection {
@@ -38,7 +50,7 @@ struct GuideSection: Section {
 
     func configureCell(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: GuideCell.self), for: indexPath) as! GuideCell
-        cell.title = self.title
+        cell.submitSub = submitSub
         return cell
     }
 }

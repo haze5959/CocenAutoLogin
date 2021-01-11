@@ -19,6 +19,10 @@ final class OQUserDefaults {
         self.userDefaults.setValue(value, forKey: forKey.rawValue)
     }
     
+    func remove(forKey: UserDefaultKey) {
+        self.userDefaults.removeObject(forKey: forKey.rawValue)
+    }
+    
     func string(forKey: UserDefaultKey) -> String {
         return self.userDefaults.string(forKey: forKey.rawValue) ?? ""
     }

@@ -16,12 +16,14 @@ final class MainViewModel: ViewModelType {
         let optKey = PassthroughSubject<String, Never>()
         let appProcess = PassthroughSubject<AppProcess, Never>()
         let retry = PassthroughSubject<Void, Never>()
+        let otpKeySubmit = PassthroughSubject<String, Never>()
+        let otpKeyDelete = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
         let layout: AnyPublisher<UICollectionViewLayout, Never>
         let optValue: AnyPublisher<OTPResult, Never>
-        let appProcessValue: AnyPublisher<AppProcess, Never>
+        let appProcessAction: AnyPublisher<AppProcess, Never>
     }
     
     let input = Input()
@@ -29,11 +31,8 @@ final class MainViewModel: ViewModelType {
     
     func transform() -> Output {
         let retryAction = input.retry
-//            .handleEvents(receiveOutput: { _ in
-//                self.input.appProcess.send(.connectWifi)
-//            })
             .map({ OQUserDefaults().string(forKey: .otpKey) })
-        let optValAction = Publishers.Merge(retryAction, input.optKey)
+        let optValAction = Publishers.Merge3(retryAction, input.optKey, input.otpKeySubmit)
             .flatMap { (key) -> AnyPublisher<OTPResult, Never> in
                 guard let data = base32DecodeToData(key),
                       let totp = TOTP(secret: data),
@@ -56,6 +55,6 @@ final class MainViewModel: ViewModelType {
             return Just(layout).erased
         }.erased
         
-        return Output(layout: updateLayout, optValue: optValAction, appProcessValue: appProcessValAction)
+        return Output(layout: updateLayout, optValue: optValAction, appProcessAction: appProcessValAction)
     }
 }
