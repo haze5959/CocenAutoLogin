@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		C313A919259B194800FC7A62 /* OQUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C313A918259B194800FC7A62 /* OQUserDefaults.swift */; };
+		C333C22F25AEBCA70091F755 /* DefaultBtnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C333C22D25AEBCA70091F755 /* DefaultBtnCell.swift */; };
+		C333C23025AEBCA70091F755 /* DefaultBtnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C333C22E25AEBCA70091F755 /* DefaultBtnCell.xib */; };
+		C333C25925AEF7070091F755 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C333C25825AEF7070091F755 /* NetworkExtension.framework */; };
 		C375D23325A6A7930094F473 /* ProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375D22925A6A7930094F473 /* ProgressCell.swift */; };
 		C375D23425A6A7940094F473 /* SuccessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375D22A25A6A7930094F473 /* SuccessCell.swift */; };
 		C375D23525A6A7940094F473 /* GuideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C375D22B25A6A7930094F473 /* GuideCell.xib */; };
@@ -45,6 +48,9 @@
 
 /* Begin PBXFileReference section */
 		C313A918259B194800FC7A62 /* OQUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OQUserDefaults.swift; sourceTree = "<group>"; };
+		C333C22D25AEBCA70091F755 /* DefaultBtnCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultBtnCell.swift; sourceTree = "<group>"; };
+		C333C22E25AEBCA70091F755 /* DefaultBtnCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultBtnCell.xib; sourceTree = "<group>"; };
+		C333C25825AEF7070091F755 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		C375D22925A6A7930094F473 /* ProgressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressCell.swift; sourceTree = "<group>"; };
 		C375D22A25A6A7930094F473 /* SuccessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessCell.swift; sourceTree = "<group>"; };
 		C375D22B25A6A7930094F473 /* GuideCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuideCell.xib; sourceTree = "<group>"; };
@@ -87,6 +93,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C375D24625A6D5C80094F473 /* StepIndicator in Frameworks */,
+				C333C25925AEF7070091F755 /* NetworkExtension.framework in Frameworks */,
 				C3C198F325933BEB007029E0 /* SwiftOTP in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,9 +101,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C333C25725AEF7070091F755 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C333C25825AEF7070091F755 /* NetworkExtension.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C375D22525A6A3C40094F473 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				C333C22D25AEBCA70091F755 /* DefaultBtnCell.swift */,
+				C333C22E25AEBCA70091F755 /* DefaultBtnCell.xib */,
 				C375D2D725AC35A70094F473 /* DefaultCell.swift */,
 				C375D2D625AC35A70094F473 /* DefaultCell.xib */,
 				C375D24025A6AA2A0094F473 /* OtpEtcCell.swift */,
@@ -129,6 +146,7 @@
 			children = (
 				C3C198B02593196A007029E0 /* CocenAutoLogin */,
 				C3C198AF2593196A007029E0 /* Products */,
+				C333C25725AEF7070091F755 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -276,6 +294,7 @@
 				C375D23C25A6A7940094F473 /* ProgressCell.xib in Resources */,
 				C375D23925A6A7940094F473 /* SuccessCell.xib in Resources */,
 				C375D23A25A6A7940094F473 /* OtpFailCell.xib in Resources */,
+				C333C23025AEBCA70091F755 /* DefaultBtnCell.xib in Resources */,
 				C375D23725A6A7940094F473 /* WebViewCell.xib in Resources */,
 				C3C198BE2593196C007029E0 /* LaunchScreen.storyboard in Resources */,
 				C375D2C225AC1CDC0094F473 /* SideMenuView.xib in Resources */,
@@ -305,6 +324,7 @@
 				C375D2D425AC21070094F473 /* SideMenuViewModel.swift in Sources */,
 				C375D2BD25AC14270094F473 /* OQ+UIControl.swift in Sources */,
 				C3C198B62593196A007029E0 /* MainViewController.swift in Sources */,
+				C333C22F25AEBCA70091F755 /* DefaultBtnCell.swift in Sources */,
 				C375D2D925AC35A70094F473 /* DefaultCell.swift in Sources */,
 				C3C198F82593405E007029E0 /* AppError.swift in Sources */,
 				C3C198B22593196A007029E0 /* AppDelegate.swift in Sources */,

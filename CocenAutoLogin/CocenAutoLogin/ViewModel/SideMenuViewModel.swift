@@ -26,6 +26,7 @@ final class SideMenuViewModel: ViewModelType {
     func transform() -> Output {
         let delOtpKeyCompleteAction = input.delOtpKey
             .flatMap { (_) -> AnyPublisher<Void, Never> in
+                OQUserDefaults().remove(forKey: .idKey)
                 OQUserDefaults().remove(forKey: .otpKey)
                 return Just(()).erased
             }.erased

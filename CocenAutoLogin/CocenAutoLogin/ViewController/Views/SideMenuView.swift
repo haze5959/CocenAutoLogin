@@ -9,8 +9,9 @@ import UIKit
 import Combine
 
 final class SideMenuView: UIView, CommonView {
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var leadingCont: NSLayoutConstraint!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var leadingCont: NSLayoutConstraint!
+    @IBOutlet private weak var panGestureSpace: UIView!
     
     var delOtpKeySub: PassthroughSubject<Void, Never>?
     private lazy var viewModel = SideMenuViewModel()
@@ -24,9 +25,10 @@ final class SideMenuView: UIView, CommonView {
     
     func bindings() {
         self.collectionView.dataSource = self
-        self.collectionView.delegate = self
         self.collectionView.register(UINib(nibName: String(describing: DefaultCell.self), bundle: nil),
                                      forCellWithReuseIdentifier: String(describing: DefaultCell.self))
+        self.collectionView.register(UINib(nibName: String(describing: DefaultBtnCell.self), bundle: nil),
+                                     forCellWithReuseIdentifier: String(describing: DefaultBtnCell.self))
         
         let output = viewModel.transform()
         output.layout
@@ -36,11 +38,51 @@ final class SideMenuView: UIView, CommonView {
         output.delOtpKeyComplete
             .sink { [weak self] _ in
                 self?.delOtpKeySub?.send()
+                self?.close()
             }.store(in: &self.cancellables)
         
         output.sideMenuAction
             .sink { [weak self] _ in
                 self?.collectionView.reloadData()
+            }.store(in: &self.cancellables)
+        
+        panGestureSpace.gesture(.tap())
+            .sink { [weak self] _ in
+                self?.close()
+            }.store(in: &self.cancellables)
+        
+        panGestureSpace.gesture(.pan())
+            .subscribe(on: DispatchQueue.main)
+            .sink { [unowned self] gesture in
+                guard let panGesture = gesture.get() as? UIPanGestureRecognizer else {
+                    return
+                }
+                
+                switch panGesture.state {
+                case .changed:
+                    guard let view = panGesture.view else {
+                        return
+                    }
+                    
+                    let transition = panGesture.translation(in: view)
+                    var changedX = leadingCont.constant + transition.x
+                    
+                    if changedX > 0 {
+                        changedX = 0
+                    }
+                    
+                    leadingCont.constant = changedX
+                    layoutIfNeeded()
+                    
+                    panGesture.setTranslation(CGPoint.zero, in: view)
+                case .ended:
+                    if leadingCont.constant < -80 {
+                        close()
+                    } else {
+                        open()
+                    }
+                default: break
+                }
             }.store(in: &self.cancellables)
     }
     
@@ -48,9 +90,17 @@ final class SideMenuView: UIView, CommonView {
         self.isHidden = true
         leadingCont.constant = -frame.width
         
-        // OTP 키가 저장 되어있다면 바로 연결 진행
-        if let key = OQUserDefaults().object(forKey: .otpKey) as? String {
-            viewModel.input.sideMenuState.send(.main(otpKey: key))
+        reloadView()
+    }
+    
+    func reloadView() {
+        if let userId = OQUserDefaults().object(forKey: .idKey) as? String,
+           let otpKey = OQUserDefaults().object(forKey: .otpKey) as? String {
+            viewModel.input.sideMenuState.send(.main(userId: userId,
+                                                     otpKey: otpKey,
+                                                     removeInfoEvent: { [weak self] in
+                                                        self?.viewModel.input.delOtpKey.send()
+                                                     }))
         } else {
             viewModel.input.sideMenuState.send(.noneOtpKey)
         }
@@ -59,6 +109,7 @@ final class SideMenuView: UIView, CommonView {
 
 extension SideMenuView {
     func open() {
+        reloadView()
         layer.removeAllAnimations()
         self.isHidden = false
         self.leadingCont.constant = 0
@@ -82,18 +133,15 @@ extension SideMenuView {
     }
     
     func toggle() {
-        if self.leadingCont.constant >= 0 {
-            self.close()
+        if isOpen {
+            close()
         } else {
-            self.open()
+            open()
         }
     }
-}
-
-// MARK: - UICollectionViewDelegate
-extension SideMenuView: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //        self.viewModel.input.selectItem.send(indexPath)
+    
+    var isOpen: Bool {
+        return leadingCont.constant >= 0
     }
 }
 

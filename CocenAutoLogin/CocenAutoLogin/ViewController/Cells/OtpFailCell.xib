@@ -17,26 +17,40 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="207"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OTP Fail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmD-t4-Zoc">
-                        <rect key="frame" x="173" y="62" width="68.333333333333314" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OTP Fail" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmD-t4-Zoc">
+                        <rect key="frame" x="20" y="41.666666666666664" width="374" height="20.333333333333336"/>
                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exclamationmark.triangle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="6vj-Qa-R1z">
-                        <rect key="frame" x="157" y="86" width="100" height="97.666666666666686"/>
+                        <rect key="frame" x="157" y="55" width="100" height="97.666666666666686"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="100" id="1hr-fA-l8n"/>
                             <constraint firstAttribute="width" constant="100" id="Hr7-YG-HFE"/>
                         </constraints>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRt-kT-oa1">
+                        <rect key="frame" x="147" y="133.33333333333334" width="120" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="120" id="oEQ-Ud-Aqp"/>
+                            <constraint firstAttribute="height" constant="44" id="vgV-by-f7B"/>
+                        </constraints>
+                        <state key="normal" title="재입력"/>
+                        <connections>
+                            <action selector="pressRetryBtn:" destination="4Jy-U2-tk4" eventType="touchUpInside" id="xJ8-EJ-BhR"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="bRt-kT-oa1" firstAttribute="centerY" secondItem="Tsq-iI-Pco" secondAttribute="centerY" multiplier="1.5" id="6iO-aP-rY8"/>
                     <constraint firstItem="6vj-Qa-R1z" firstAttribute="centerX" secondItem="Tsq-iI-Pco" secondAttribute="centerX" id="Rwg-L3-hvQ"/>
-                    <constraint firstItem="6vj-Qa-R1z" firstAttribute="centerY" secondItem="Tsq-iI-Pco" secondAttribute="centerY" multiplier="1.3" id="hu8-T3-gFF"/>
-                    <constraint firstItem="wmD-t4-Zoc" firstAttribute="centerX" secondItem="Tsq-iI-Pco" secondAttribute="centerX" id="n2G-KD-qTS"/>
-                    <constraint firstItem="wmD-t4-Zoc" firstAttribute="centerY" secondItem="Tsq-iI-Pco" secondAttribute="centerY" multiplier="0.7" id="ptw-Uw-gGd"/>
+                    <constraint firstItem="wmD-t4-Zoc" firstAttribute="leading" secondItem="Tsq-iI-Pco" secondAttribute="leading" constant="20" id="XJ9-G7-lCu"/>
+                    <constraint firstItem="bRt-kT-oa1" firstAttribute="centerX" secondItem="Tsq-iI-Pco" secondAttribute="centerX" id="axO-I4-z64"/>
+                    <constraint firstItem="6vj-Qa-R1z" firstAttribute="centerY" secondItem="Tsq-iI-Pco" secondAttribute="centerY" id="hu8-T3-gFF"/>
+                    <constraint firstAttribute="trailing" secondItem="wmD-t4-Zoc" secondAttribute="trailing" constant="20" id="pSk-I4-WoU"/>
+                    <constraint firstItem="wmD-t4-Zoc" firstAttribute="centerY" secondItem="Tsq-iI-Pco" secondAttribute="centerY" multiplier="0.5" id="ptw-Uw-gGd"/>
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="414" height="207"/>

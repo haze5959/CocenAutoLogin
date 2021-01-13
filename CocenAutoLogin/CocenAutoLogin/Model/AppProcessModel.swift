@@ -10,9 +10,9 @@ import Combine
 
 /// 와이파이 접속 절차
 enum AppProcess {
-    case initPage(submitSub: PassthroughSubject<String, Never>)   // OTP 준비
-    case failOTP(msg: String)  // OTP 만들기 실패
-    case failEtc(msg: String)  // 와이파이 연결이나 인증 페이지에서 실패했을 경우
+    case initPage(submitSub: PassthroughSubject<(id: String, optKey: String), Never>)   // OTP 준비
+    case failOTP(msg: String, retryAction: () -> Void)  // OTP 만들기 실패
+    case failEtc(msg: String, retryAction: () -> Void)  // 와이파이 연결이나 인증 페이지에서 실패했을 경우
     case connectWifi    // Cocen 2g 연결 중...
     case loadAuthPage   // 인증 페이지 로딩 중...
     case auth   // 인증 중...
@@ -23,10 +23,10 @@ enum AppProcess {
         switch self {
         case .initPage(let submitSub):
             return [GuideSection(submitSub: submitSub)]
-        case .failOTP(let msg):
-            return [OtpFailSection(msg: msg)]
-        case .failEtc(let msg):
-            return [OtpEtcSection(msg: msg)]
+        case .failOTP(let msg, let retryAction):
+            return [OtpFailSection(msg: msg, action: retryAction)]
+        case .failEtc(let msg, let retryAction):
+            return [OtpEtcSection(msg: msg, action: retryAction)]
         case .connectWifi:
             return [ProgressSection(process: self), WebViewSection()]
         case .loadAuthPage:
@@ -40,7 +40,7 @@ enum AppProcess {
     
     var desc: String {
         switch self {
-        case .connectWifi: return "와이파이 연결 중... (Cocen_2g)"
+        case .connectWifi: return "와이파이 연결 중... (cocen_2g)"
         case .loadAuthPage: return "인증 페이지 로딩 중..."
         case .auth: return "인증 중..."
         default: return ""

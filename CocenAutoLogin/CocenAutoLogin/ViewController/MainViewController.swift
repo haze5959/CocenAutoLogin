@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import NetworkExtension
 
 final class MainViewController: UIViewController, CommonView {
     @IBOutlet weak var collectionView: UICollectionView!
@@ -34,7 +35,6 @@ final class MainViewController: UIViewController, CommonView {
     
     func bindings() {
         self.collectionView.dataSource = self
-        self.collectionView.delegate = self
         self.collectionView.register(UINib(nibName: String(describing: OtpEtcCell.self), bundle: nil), forCellWithReuseIdentifier: String(describing: OtpEtcCell.self))
         self.collectionView.register(UINib(nibName: String(describing: GuideCell.self), bundle: nil), forCellWithReuseIdentifier: String(describing: GuideCell.self))
         self.collectionView.register(UINib(nibName: String(describing: OtpFailCell.self), bundle: nil), forCellWithReuseIdentifier: String(describing: OtpFailCell.self))
@@ -77,7 +77,16 @@ final class MainViewController: UIViewController, CommonView {
                 self?.viewModel.input.appProcess.send(.connectWifi)
             case .failure(let error):
                 print(error.localizedDescription)
-                self?.viewModel.input.appProcess.send(.failOTP(msg: error.localizedDescription))
+                self?.viewModel.input.appProcess.send(.failOTP(msg: "OTP 키 값이 정상적이지 않습니다.",
+                                                               retryAction: { [weak self] in
+                                                                guard let self = self else {
+                                                                    return
+                                                                }
+                                                                
+                                                                self.viewModel.input.appProcess
+                                                                    .send(.initPage(submitSub: self.viewModel.input.userInfoSubmit))
+                                                               })
+                )
             }
         }.store(in: &self.cancellables)
         
@@ -88,6 +97,30 @@ final class MainViewController: UIViewController, CommonView {
                 self?.sideMenuView.toggle()
             })
             .store(in: &self.cancellables)
+        
+        collectionView.gesture(.leftEdge())
+            .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
+            .filter({ [unowned self] _ in !sideMenuView.isOpen })
+            .sink { [unowned self] _ in
+                sideMenuView.open()
+            }.store(in: &self.cancellables)
+        
+        sideMenuView.delOtpKeySub = viewModel.input.userInfoDelete
+        
+        Publishers.Merge(
+            NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification),
+            NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
+        ).compactMap { notification -> CGFloat? in
+            if notification.name == UIResponder.keyboardWillShowNotification {
+                return (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
+            } else {
+                return 0
+            }
+        }
+        .receive(on: DispatchQueue.main)
+        .sink { [weak self] (keyboardHeight) in
+            self?.view.frame.origin.y = -(keyboardHeight / 2)
+        }.store(in: &self.cancellables)
     }
     
     func setupView() {
@@ -95,11 +128,12 @@ final class MainViewController: UIViewController, CommonView {
         
         view.addSubview(sideMenuView)
         
-        // OTP 키가 저장 되어있다면 바로 연결 진행
-        if let key = OQUserDefaults().object(forKey: .otpKey) as? String {
+        // OTP 키와 아이디가 저장 되어있다면 바로 연결 진행
+        if !OQUserDefaults().string(forKey: .idKey).isEmpty,
+           let key = OQUserDefaults().object(forKey: .otpKey) as? String {
             viewModel.input.optKey.send(key)
         } else {
-            viewModel.input.appProcess.send(.initPage(submitSub: viewModel.input.otpKeySubmit))
+            viewModel.input.appProcess.send(.initPage(submitSub: viewModel.input.userInfoSubmit))
         }
     }
 }
@@ -107,16 +141,29 @@ final class MainViewController: UIViewController, CommonView {
 // MARK: View Setting
 extension MainViewController {
     func initPageView() {
-        
     }
     
     func failOTPView() {
-        
     }
     
     func connectWifiView() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
-            viewModel.input.appProcess.send(.loadAuthPage)
+        let configuration = NEHotspotConfiguration.init(ssid: "cocen_2g", passphrase: "make#2300", isWEP: false)
+        configuration.joinOnce = false
+        NEHotspotConfigurationManager.shared.apply(configuration) { [weak self] (error) in
+            if error != nil {
+                if error?.localizedDescription == "already associated." {
+                    print("WIFI Connected! (already associated.)")
+                    self?.viewModel.input.appProcess.send(.loadAuthPage)
+                } else {
+                    print("WIFI No Connected")
+                    self?.viewModel.input.appProcess.send(.failEtc(msg: "cocen_2g에 접속할 수 없습니다.", retryAction: {
+                        self?.viewModel.input.appProcess.send(.connectWifi)
+                    }))
+                }
+            } else {
+                print("WIFI Connected!")
+                self?.viewModel.input.appProcess.send(.loadAuthPage)
+            }
         }
     }
     
@@ -137,23 +184,16 @@ extension MainViewController {
     }
 }
 
-// MARK: - UICollectionViewDelegate
-extension MainViewController: UICollectionViewDelegate {
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        self.viewModel.input.selectItem.send(indexPath)
-//    }
-}
-
 //// MARK: - UICollectionViewDataSource
 extension MainViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return viewModel.sections.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.sections[section].numberOfItems
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return viewModel.sections[indexPath.section].configureCell(collectionView: collectionView, indexPath: indexPath)
     }

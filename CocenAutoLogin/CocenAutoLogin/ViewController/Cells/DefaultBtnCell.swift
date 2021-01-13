@@ -1,35 +1,36 @@
 //
-//  OtpFailCell.swift
+//  DefaultBtnCell.swift
 //
 //  Created by OGyu kwon on 2020/08/20.
 //  Copyright © 2020 OQ. All rights reserved.
 //
 
 import UIKit
+import Combine
 
-class OtpFailCell: UICollectionViewCell {
-    @IBOutlet private var msgLabel: UILabel!
+class DefaultBtnCell: UICollectionViewCell {
+    @IBOutlet weak var titleButton: UIButton!
     
-    var message: String? {
+    var title: String? {
         didSet {
-            msgLabel.text = message
+            titleButton.setTitle(title, for: .normal)
         }
     }
     
     var action: (() -> Void)?
     
-    @IBAction func pressRetryBtn(_ sender: Any) {
+    @IBAction func pressTitleBtn(_ sender: Any) {
         action?()
     }
 }
 
-struct OtpFailSection: Section {
+struct DefaultBtnSection: Section {
     let numberOfItems = 1
     private let title: String
     private let action: () -> Void
     
-    init(msg: String, action: @escaping () -> Void) {
-        self.title = msg
+    init(title: String, action: @escaping () -> Void) {
+        self.title = title
         self.action = action
     }
     
@@ -37,7 +38,7 @@ struct OtpFailSection: Section {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
@@ -45,8 +46,8 @@ struct OtpFailSection: Section {
     }
     
     func configureCell(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: OtpFailCell.self), for: indexPath) as! OtpFailCell
-        cell.message = self.title
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: DefaultBtnCell.self), for: indexPath) as! DefaultBtnCell
+        cell.title = title
         cell.action = action
         return cell
     }

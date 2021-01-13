@@ -33,7 +33,7 @@ class ProgressCell: UICollectionViewCell {
         UIView.animate(withDuration: 1.0,
                        delay: 0.0,
                        options: [.autoreverse ,.repeat],
-                       animations: { [self] () -> Void in
+                       animations: { [self] in
                         descLabel.alpha = 0.2
                         
                        })

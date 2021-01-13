@@ -10,6 +10,7 @@ import Foundation
 final class OQUserDefaults {
     // MARK: UserInfo Keys
     enum UserDefaultKey: String {
+        case idKey = "IDKey.key"
         case otpKey = "OTPKey.key"
     }
     

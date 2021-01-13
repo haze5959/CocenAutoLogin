@@ -10,12 +10,19 @@ import Combine
 
 class GuideCell: UICollectionViewCell {
     @IBOutlet private var titleLabel: UILabel!
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var idTextField: UITextField!
+    @IBOutlet weak var otpTextField: UITextField!
     
-    var submitSub: PassthroughSubject<String, Never>?
+    var submitSub: PassthroughSubject<(id: String, optKey: String), Never>?
     
     @IBAction func pressSubmitBtn(_ sender: Any) {
-        guard let otpKey = textField.text else {
+        guard let idStr = idTextField.text,
+              !idStr.isEmpty else {
+            titleLabel.text = "아이디가 입력되지 않았습니다."
+            return
+        }
+        
+        guard let otpKey = otpTextField.text else {
             titleLabel.text = "OTP Key가 입력되지 않았습니다."
             return
         }
@@ -25,15 +32,15 @@ class GuideCell: UICollectionViewCell {
             return
         }
         
-        submitSub?.send(otpKey)
+        submitSub?.send((idStr, otpKey))
     }
 }
 
 struct GuideSection: Section {
     let numberOfItems = 1
-    var submitSub: PassthroughSubject<String, Never>
+    var submitSub: PassthroughSubject<(id: String, optKey: String), Never>
 
-    init(submitSub: PassthroughSubject<String, Never>) {
+    init(submitSub: PassthroughSubject<(id: String, optKey: String), Never>) {
         self.submitSub = submitSub
     }
 

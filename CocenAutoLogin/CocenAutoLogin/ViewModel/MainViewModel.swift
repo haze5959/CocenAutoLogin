@@ -16,8 +16,8 @@ final class MainViewModel: ViewModelType {
         let optKey = PassthroughSubject<String, Never>()
         let appProcess = PassthroughSubject<AppProcess, Never>()
         let retry = PassthroughSubject<Void, Never>()
-        let otpKeySubmit = PassthroughSubject<String, Never>()
-        let otpKeyDelete = PassthroughSubject<Void, Never>()
+        let userInfoSubmit = PassthroughSubject<(id: String, optKey: String), Never>()
+        let userInfoDelete = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
@@ -31,8 +31,20 @@ final class MainViewModel: ViewModelType {
     
     func transform() -> Output {
         let retryAction = input.retry
-            .map({ OQUserDefaults().string(forKey: .otpKey) })
-        let optValAction = Publishers.Merge3(retryAction, input.optKey, input.otpKeySubmit)
+            .compactMap { [unowned self] _ -> String? in
+                if OQUserDefaults().string(forKey: .idKey).isEmpty || OQUserDefaults().string(forKey: .otpKey).isEmpty {
+                    input.appProcess.send(.initPage(submitSub: input.userInfoSubmit))
+                    return nil
+                } else {
+                    return OQUserDefaults().string(forKey: .otpKey)
+                }
+            }
+        let submitAction = input.userInfoSubmit
+            .handleEvents(receiveOutput: { info in
+                OQUserDefaults().setValue(info.id, forKey: .idKey)
+            })
+            .map({ $0.optKey })
+        let optValAction = Publishers.Merge3(retryAction, input.optKey, submitAction)
             .flatMap { (key) -> AnyPublisher<OTPResult, Never> in
                 guard let data = base32DecodeToData(key),
                       let totp = TOTP(secret: data),
@@ -40,12 +52,18 @@ final class MainViewModel: ViewModelType {
                     return Just(OTPResult.failure(.optKey)).erased
                 }
                 
+                OQUserDefaults().setValue(key, forKey: .otpKey)
                 return Just(OTPResult.success(otpString)).erased
             }.erased
         
-        let appProcessValAction = input.appProcess.handleEvents(receiveOutput: { [weak self] process in
-            self?.sections = process.sections
-        }).erased
+        let deleteAction = input.userInfoDelete.map({ [unowned self] _ in
+            AppProcess.initPage(submitSub: input.userInfoSubmit)
+        })
+        
+        let appProcessValAction = Publishers.Merge(input.appProcess, deleteAction)
+            .handleEvents(receiveOutput: { [weak self] process in
+                self?.sections = process.sections
+            }).erased
         
         let updateLayout = appProcessValAction.flatMap { (key) -> AnyPublisher<UICollectionViewLayout, Never> in
             let layout = UICollectionViewCompositionalLayout { [weak self] (sectionIndex, environment) -> NSCollectionLayoutSection? in

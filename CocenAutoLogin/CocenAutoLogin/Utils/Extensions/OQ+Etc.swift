@@ -9,8 +9,11 @@ import UIKit
 
 extension UIView {
     class func instanceFromNib() -> UIView {
-        print(String(describing: Self.self))
         return UINib(nibName: String(describing: Self.self), bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! UIView
+    }
+    
+    func gesture(_ gestureType: GestureType = .tap()) -> GesturePublisher {
+        .init(view: self, gestureType: gestureType)
     }
 }
 
