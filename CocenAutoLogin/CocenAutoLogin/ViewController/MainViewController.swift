@@ -8,10 +8,12 @@
 import UIKit
 import Combine
 import NetworkExtension
+import WebKit
 
 final class MainViewController: UIViewController, CommonView {
     @IBOutlet weak var collectionView: UICollectionView!
     
+    private let webView = WKWebView()
     private lazy var viewModel = MainViewModel()
     private var cancellables = Set<AnyCancellable>()
     
@@ -34,24 +36,22 @@ final class MainViewController: UIViewController, CommonView {
     }
     
     func bindings() {
-        self.collectionView.dataSource = self
-        self.collectionView.register(UINib(nibName: String(describing: OtpEtcCell.self), bundle: nil), forCellWithReuseIdentifier: String(describing: OtpEtcCell.self))
-        self.collectionView.register(UINib(nibName: String(describing: GuideCell.self), bundle: nil), forCellWithReuseIdentifier: String(describing: GuideCell.self))
-        self.collectionView.register(UINib(nibName: String(describing: OtpFailCell.self), bundle: nil), forCellWithReuseIdentifier: String(describing: OtpFailCell.self))
-        self.collectionView.register(UINib(nibName: String(describing: ProgressCell.self), bundle: nil), forCellWithReuseIdentifier: String(describing: ProgressCell.self))
-        self.collectionView.register(UINib(nibName: String(describing: SuccessCell.self), bundle: nil), forCellWithReuseIdentifier: String(describing: SuccessCell.self))
-        self.collectionView.register(UINib(nibName: String(describing: WebViewCell.self), bundle: nil), forCellWithReuseIdentifier: String(describing: WebViewCell.self))
+        collectionView.dataSource = self
+        collectionView.register(UINib(nibName: String(describing: OtpEtcCell.self), bundle: nil), forCellWithReuseIdentifier: String(describing: OtpEtcCell.self))
+        collectionView.register(UINib(nibName: String(describing: GuideCell.self), bundle: nil), forCellWithReuseIdentifier: String(describing: GuideCell.self))
+        collectionView.register(UINib(nibName: String(describing: OtpFailCell.self), bundle: nil), forCellWithReuseIdentifier: String(describing: OtpFailCell.self))
+        collectionView.register(UINib(nibName: String(describing: ProgressCell.self), bundle: nil), forCellWithReuseIdentifier: String(describing: ProgressCell.self))
+        collectionView.register(UINib(nibName: String(describing: SuccessCell.self), bundle: nil), forCellWithReuseIdentifier: String(describing: SuccessCell.self))
+        collectionView.register(UINib(nibName: String(describing: WebViewCell.self), bundle: nil), forCellWithReuseIdentifier: String(describing: WebViewCell.self))
         
         let output = viewModel.transform()
         
         output.layout
             .assign(to: \.collectionView.collectionViewLayout, on: self)
-            .store(in: &self.cancellables)
+            .store(in: &cancellables)
         
         output.appProcessAction
             .sink { [weak self] process in
-                self?.collectionView.reloadData()
-                
                 switch process {
                 case .initPage:   // OTP 준비
                     self?.initPageView()
@@ -68,7 +68,9 @@ final class MainViewController: UIViewController, CommonView {
                 case .failEtc:
                     self?.failOTPView()
                 }
-            }.store(in: &self.cancellables)
+                
+                self?.collectionView.reloadData()
+            }.store(in: &cancellables)
         
         output.optValue.sink { [weak self] result in
             switch result {
@@ -88,7 +90,7 @@ final class MainViewController: UIViewController, CommonView {
                                                                })
                 )
             }
-        }.store(in: &self.cancellables)
+        }.store(in: &cancellables)
         
         barSettingBtn
             .publisher(for: .touchUpInside)
@@ -96,16 +98,7 @@ final class MainViewController: UIViewController, CommonView {
             .sink(receiveValue: { [weak self] _ in
                 self?.sideMenuView.toggle()
             })
-            .store(in: &self.cancellables)
-        
-        collectionView.gesture(.leftEdge())
-            .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
-            .filter({ [unowned self] _ in !sideMenuView.isOpen })
-            .sink { [unowned self] _ in
-                sideMenuView.open()
-            }.store(in: &self.cancellables)
-        
-        sideMenuView.delOtpKeySub = viewModel.input.userInfoDelete
+            .store(in: &cancellables)
         
         Publishers.Merge(
             NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification),
@@ -119,8 +112,10 @@ final class MainViewController: UIViewController, CommonView {
         }
         .receive(on: DispatchQueue.main)
         .sink { [weak self] (keyboardHeight) in
-            self?.view.frame.origin.y = -(keyboardHeight / 2)
-        }.store(in: &self.cancellables)
+            UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: { [weak self] in
+                self?.view.frame.origin.y = -(keyboardHeight / 2)
+            })
+        }.store(in: &cancellables)
     }
     
     func setupView() {
@@ -147,36 +142,42 @@ extension MainViewController {
     }
     
     func connectWifiView() {
+        NEHotspotConfigurationManager.shared.removeConfiguration(forSSID: "cocen_2g")
         let configuration = NEHotspotConfiguration.init(ssid: "cocen_2g", passphrase: "make#2300", isWEP: false)
-        configuration.joinOnce = false
+        configuration.joinOnce = true
+        
         NEHotspotConfigurationManager.shared.apply(configuration) { [weak self] (error) in
+            guard let self = self else {
+                return
+            }
+            
             if error != nil {
                 if error?.localizedDescription == "already associated." {
                     print("WIFI Connected! (already associated.)")
-                    self?.viewModel.input.appProcess.send(.loadAuthPage)
+                    self.viewModel.input.appProcess.send(.loadAuthPage(webView: self.webView))
                 } else {
                     print("WIFI No Connected")
-                    self?.viewModel.input.appProcess.send(.failEtc(msg: "cocen_2g에 접속할 수 없습니다.", retryAction: {
-                        self?.viewModel.input.appProcess.send(.connectWifi)
+                    self.viewModel.input.appProcess.send(.failEtc(msg: "cocen_2g에 접속할 수 없습니다.", retryAction: {
+                        self.viewModel.input.appProcess.send(.connectWifi)
                     }))
                 }
             } else {
                 print("WIFI Connected!")
-                self?.viewModel.input.appProcess.send(.loadAuthPage)
+                self.viewModel.input.appProcess.send(.loadAuthPage(webView: self.webView))
             }
         }
     }
     
     func loadAuthPageView() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
-            viewModel.input.appProcess.send(.auth)
+            viewModel.input.appProcess.send(.auth(webView: webView))
         }
     }
     
     func authView() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
-            viewModel.input.appProcess.send(.success(retrySub: viewModel.input.retry))
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 20) { [self] in
+//            viewModel.input.appProcess.send(.success(retrySub: viewModel.input.retry))
+//        }
     }
     
     func successView() {

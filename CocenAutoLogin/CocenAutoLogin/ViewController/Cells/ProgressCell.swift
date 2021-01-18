@@ -35,7 +35,6 @@ class ProgressCell: UICollectionViewCell {
                        options: [.autoreverse ,.repeat],
                        animations: { [self] in
                         descLabel.alpha = 0.2
-                        
                        })
     }
     

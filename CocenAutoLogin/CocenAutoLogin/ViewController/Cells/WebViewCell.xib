@@ -16,25 +16,7 @@
             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Tsq-iI-Pco">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                 <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Uu-Gm-C57">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                        <wkWebViewConfiguration key="configuration">
-                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                            <wkPreferences key="preferences"/>
-                        </wkWebViewConfiguration>
-                    </wkWebView>
-                </subviews>
-                <constraints>
-                    <constraint firstAttribute="trailing" secondItem="2Uu-Gm-C57" secondAttribute="trailing" id="0ae-fS-MzG"/>
-                    <constraint firstItem="2Uu-Gm-C57" firstAttribute="top" secondItem="Tsq-iI-Pco" secondAttribute="top" id="WSA-XD-xDk"/>
-                    <constraint firstItem="2Uu-Gm-C57" firstAttribute="leading" secondItem="Tsq-iI-Pco" secondAttribute="leading" id="dXG-5O-t9V"/>
-                    <constraint firstAttribute="bottom" secondItem="2Uu-Gm-C57" secondAttribute="bottom" id="fFR-Xe-JO7"/>
-                </constraints>
             </collectionViewCellContentView>
-            <connections>
-                <outlet property="webView" destination="2Uu-Gm-C57" id="JG1-np-Nbg"/>
-            </connections>
             <point key="canvasLocation" x="-35" y="202"/>
         </collectionViewCell>
     </objects>

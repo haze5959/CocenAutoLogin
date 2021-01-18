@@ -34,6 +34,14 @@ class GuideCell: UICollectionViewCell {
         
         submitSub?.send((idStr, otpKey))
     }
+    
+    @IBAction func pressIdFieldReturnKey(_ sender: Any) {
+        otpTextField.becomeFirstResponder()
+    }
+    
+    @IBAction func pressReturnKey(_ sender: Any) {
+        pressSubmitBtn(sender)
+    }
 }
 
 struct GuideSection: Section {

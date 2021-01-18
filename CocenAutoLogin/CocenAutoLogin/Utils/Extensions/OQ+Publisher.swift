@@ -93,10 +93,6 @@ class GestureSubscription<S: Subscriber>: NSObject, UIGestureRecognizerDelegate,
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if gestureRecognizer is UITapGestureRecognizer {
-            return touch.view == gestureRecognizer.view
-        } else {
-            return true
-        }
+        return true
     }
 }

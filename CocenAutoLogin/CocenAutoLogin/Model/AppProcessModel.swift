@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import WebKit
 
 /// 와이파이 접속 절차
 enum AppProcess {
@@ -14,8 +15,8 @@ enum AppProcess {
     case failOTP(msg: String, retryAction: () -> Void)  // OTP 만들기 실패
     case failEtc(msg: String, retryAction: () -> Void)  // 와이파이 연결이나 인증 페이지에서 실패했을 경우
     case connectWifi    // Cocen 2g 연결 중...
-    case loadAuthPage   // 인증 페이지 로딩 중...
-    case auth   // 인증 중...
+    case loadAuthPage(webView: WKWebView)   // 인증 페이지 로딩 중...
+    case auth(webView: WKWebView)   // 인증 중...
     case success(retrySub: PassthroughSubject<Void, Never>)    // 성공nting synthesized conformance of 'AppPro
     
     /// 해당 절차에서 보여줘야할 섹션들
@@ -28,11 +29,11 @@ enum AppProcess {
         case .failEtc(let msg, let retryAction):
             return [OtpEtcSection(msg: msg, action: retryAction)]
         case .connectWifi:
-            return [ProgressSection(process: self), WebViewSection()]
-        case .loadAuthPage:
-            return [ProgressSection(process: self), WebViewSection()]
-        case .auth:
-            return [ProgressSection(process: self), WebViewSection()]
+            return [ProgressSection(process: self)]
+        case .loadAuthPage(let webView):
+            return [ProgressSection(process: self), WebViewSection(process: .loadPage(url: "http://naver.com"), webView: webView)]
+        case .auth(let webView):
+            return [ProgressSection(process: self), WebViewSection(process: .script(script: "print('oqoqoq');"), webView: webView)]
         case .success(let retrySub):
             return [SuccessSection(retrySub: retrySub)]
         }

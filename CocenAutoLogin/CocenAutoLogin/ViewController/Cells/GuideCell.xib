@@ -29,7 +29,10 @@
                             <constraint firstAttribute="width" constant="250" id="sti-yh-1nj"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits"/>
+                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                        <connections>
+                            <action selector="pressIdFieldReturnKey:" destination="4Jy-U2-tk4" eventType="editingDidEndOnExit" id="MMw-SX-F6b"/>
+                        </connections>
                     </textField>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="OTP Key (16자리)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jiA-AT-EcX">
                         <rect key="frame" x="126.66666666666669" y="121.66666666666669" width="250" height="34"/>
@@ -37,8 +40,9 @@
                             <constraint firstAttribute="width" constant="250" id="U6J-mV-e8u"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits"/>
+                        <textInputTraits key="textInputTraits" returnKeyType="go"/>
                         <connections>
+                            <action selector="pressReturnKey:" destination="4Jy-U2-tk4" eventType="editingDidEndOnExit" id="FqI-lb-hAV"/>
                             <outlet property="textDropDelegate" destination="4Jy-U2-tk4" id="zqV-qg-VX0"/>
                         </connections>
                     </textField>

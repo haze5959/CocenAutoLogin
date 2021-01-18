@@ -11,11 +11,13 @@
 		C333C22F25AEBCA70091F755 /* DefaultBtnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C333C22D25AEBCA70091F755 /* DefaultBtnCell.swift */; };
 		C333C23025AEBCA70091F755 /* DefaultBtnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C333C22E25AEBCA70091F755 /* DefaultBtnCell.xib */; };
 		C333C25925AEF7070091F755 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C333C25825AEF7070091F755 /* NetworkExtension.framework */; };
+		C333C29C25B57CB40091F755 /* WebViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C333C29A25B57CB40091F755 /* WebViewCell.swift */; };
+		C333C29D25B57CB40091F755 /* WebViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C333C29B25B57CB40091F755 /* WebViewCell.xib */; };
+		C333C2A025B57D240091F755 /* WebProcessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C333C29F25B57D240091F755 /* WebProcessModel.swift */; };
+		C333C2A325B58BFF0091F755 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C333C2A225B58BFF0091F755 /* ExternalAccessory.framework */; };
 		C375D23325A6A7930094F473 /* ProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375D22925A6A7930094F473 /* ProgressCell.swift */; };
 		C375D23425A6A7940094F473 /* SuccessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375D22A25A6A7930094F473 /* SuccessCell.swift */; };
 		C375D23525A6A7940094F473 /* GuideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C375D22B25A6A7930094F473 /* GuideCell.xib */; };
-		C375D23625A6A7940094F473 /* WebViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375D22C25A6A7930094F473 /* WebViewCell.swift */; };
-		C375D23725A6A7940094F473 /* WebViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C375D22D25A6A7930094F473 /* WebViewCell.xib */; };
 		C375D23825A6A7940094F473 /* GuideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375D22E25A6A7930094F473 /* GuideCell.swift */; };
 		C375D23925A6A7940094F473 /* SuccessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C375D22F25A6A7930094F473 /* SuccessCell.xib */; };
 		C375D23A25A6A7940094F473 /* OtpFailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C375D23025A6A7930094F473 /* OtpFailCell.xib */; };
@@ -51,11 +53,13 @@
 		C333C22D25AEBCA70091F755 /* DefaultBtnCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultBtnCell.swift; sourceTree = "<group>"; };
 		C333C22E25AEBCA70091F755 /* DefaultBtnCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultBtnCell.xib; sourceTree = "<group>"; };
 		C333C25825AEF7070091F755 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		C333C29A25B57CB40091F755 /* WebViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewCell.swift; sourceTree = "<group>"; };
+		C333C29B25B57CB40091F755 /* WebViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewCell.xib; sourceTree = "<group>"; };
+		C333C29F25B57D240091F755 /* WebProcessModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebProcessModel.swift; sourceTree = "<group>"; };
+		C333C2A225B58BFF0091F755 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		C375D22925A6A7930094F473 /* ProgressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressCell.swift; sourceTree = "<group>"; };
 		C375D22A25A6A7930094F473 /* SuccessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessCell.swift; sourceTree = "<group>"; };
 		C375D22B25A6A7930094F473 /* GuideCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuideCell.xib; sourceTree = "<group>"; };
-		C375D22C25A6A7930094F473 /* WebViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewCell.swift; sourceTree = "<group>"; };
-		C375D22D25A6A7930094F473 /* WebViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewCell.xib; sourceTree = "<group>"; };
 		C375D22E25A6A7930094F473 /* GuideCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideCell.swift; sourceTree = "<group>"; };
 		C375D22F25A6A7930094F473 /* SuccessCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuccessCell.xib; sourceTree = "<group>"; };
 		C375D23025A6A7930094F473 /* OtpFailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtpFailCell.xib; sourceTree = "<group>"; };
@@ -94,6 +98,7 @@
 			files = (
 				C375D24625A6D5C80094F473 /* StepIndicator in Frameworks */,
 				C333C25925AEF7070091F755 /* NetworkExtension.framework in Frameworks */,
+				C333C2A325B58BFF0091F755 /* ExternalAccessory.framework in Frameworks */,
 				C3C198F325933BEB007029E0 /* SwiftOTP in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,6 +109,7 @@
 		C333C25725AEF7070091F755 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C333C2A225B58BFF0091F755 /* ExternalAccessory.framework */,
 				C333C25825AEF7070091F755 /* NetworkExtension.framework */,
 			);
 			name = Frameworks;
@@ -112,6 +118,8 @@
 		C375D22525A6A3C40094F473 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				C333C29A25B57CB40091F755 /* WebViewCell.swift */,
+				C333C29B25B57CB40091F755 /* WebViewCell.xib */,
 				C333C22D25AEBCA70091F755 /* DefaultBtnCell.swift */,
 				C333C22E25AEBCA70091F755 /* DefaultBtnCell.xib */,
 				C375D2D725AC35A70094F473 /* DefaultCell.swift */,
@@ -126,8 +134,6 @@
 				C375D23225A6A7930094F473 /* ProgressCell.xib */,
 				C375D22A25A6A7930094F473 /* SuccessCell.swift */,
 				C375D22F25A6A7930094F473 /* SuccessCell.xib */,
-				C375D22C25A6A7930094F473 /* WebViewCell.swift */,
-				C375D22D25A6A7930094F473 /* WebViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -209,6 +215,7 @@
 		C3C198EC25932DD5007029E0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C333C29F25B57D240091F755 /* WebProcessModel.swift */,
 				C3C199022593448E007029E0 /* AppProcessModel.swift */,
 				C375D2C725AC1DFA0094F473 /* SideMenuModel.swift */,
 			);
@@ -295,7 +302,7 @@
 				C375D23925A6A7940094F473 /* SuccessCell.xib in Resources */,
 				C375D23A25A6A7940094F473 /* OtpFailCell.xib in Resources */,
 				C333C23025AEBCA70091F755 /* DefaultBtnCell.xib in Resources */,
-				C375D23725A6A7940094F473 /* WebViewCell.xib in Resources */,
+				C333C29D25B57CB40091F755 /* WebViewCell.xib in Resources */,
 				C3C198BE2593196C007029E0 /* LaunchScreen.storyboard in Resources */,
 				C375D2C225AC1CDC0094F473 /* SideMenuView.xib in Resources */,
 				C3C198BB2593196C007029E0 /* Assets.xcassets in Resources */,
@@ -313,10 +320,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3C198EF25932E07007029E0 /* MainViewModel.swift in Sources */,
+				C333C29C25B57CB40091F755 /* WebViewCell.swift in Sources */,
 				C375D2C525AC1CF30094F473 /* SideMenuView.swift in Sources */,
-				C375D23625A6A7940094F473 /* WebViewCell.swift in Sources */,
 				C375D24225A6AA2A0094F473 /* OtpEtcCell.swift in Sources */,
 				C375D2DD25AC3C790094F473 /* OQ+Etc.swift in Sources */,
+				C333C2A025B57D240091F755 /* WebProcessModel.swift in Sources */,
 				C3C199032593448E007029E0 /* AppProcessModel.swift in Sources */,
 				C3C198FC25934142007029E0 /* OQ+Publisher.swift in Sources */,
 				C375D23325A6A7930094F473 /* ProgressCell.swift in Sources */,

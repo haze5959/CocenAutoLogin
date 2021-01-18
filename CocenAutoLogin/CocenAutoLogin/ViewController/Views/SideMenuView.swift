@@ -11,9 +11,12 @@ import Combine
 final class SideMenuView: UIView, CommonView {
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var leadingCont: NSLayoutConstraint!
-    @IBOutlet private weak var panGestureSpace: UIView!
     
+    private let sideViewW: CGFloat = 300
+    private let interaciveW: CGFloat = 40
     var delOtpKeySub: PassthroughSubject<Void, Never>?
+    
+    private var gestureBeginPos = CGPoint.zero
     private lazy var viewModel = SideMenuViewModel()
     private var cancellables = Set<AnyCancellable>()
     
@@ -46,40 +49,54 @@ final class SideMenuView: UIView, CommonView {
                 self?.collectionView.reloadData()
             }.store(in: &self.cancellables)
         
-        panGestureSpace.gesture(.tap())
-            .sink { [weak self] _ in
-                self?.close()
+        gesture(.tap())
+            .sink { [unowned self] gesture in
+                let position = gesture.get().location(in: self)
+                if position.x > sideViewW {
+                    self.close()
+                }
             }.store(in: &self.cancellables)
         
-        panGestureSpace.gesture(.pan())
+        gesture(.pan())
             .subscribe(on: DispatchQueue.main)
             .sink { [unowned self] gesture in
-                guard let panGesture = gesture.get() as? UIPanGestureRecognizer else {
+                guard let panGesture = gesture.get() as? UIPanGestureRecognizer,
+                      let view = panGesture.view else {
                     return
                 }
                 
+                let transition = panGesture.translation(in: view)
+                
                 switch panGesture.state {
+                case .began:
+                    gestureBeginPos = transition
                 case .changed:
-                    guard let view = panGesture.view else {
-                        return
-                    }
-                    
-                    let transition = panGesture.translation(in: view)
                     var changedX = leadingCont.constant + transition.x
                     
                     if changedX > 0 {
                         changedX = 0
                     }
                     
+                    
+                    self.backgroundColor = UIColor.black.withAlphaComponent(((sideViewW + changedX) / sideViewW) * 0.5)
+                    
                     leadingCont.constant = changedX
                     layoutIfNeeded()
                     
                     panGesture.setTranslation(CGPoint.zero, in: view)
                 case .ended:
-                    if leadingCont.constant < -80 {
-                        close()
+                    if gestureBeginPos.x < 0 {
+                        if leadingCont.constant > -interaciveW {
+                            open()
+                        } else {
+                            close()
+                        }
                     } else {
-                        open()
+                        if leadingCont.constant < -sideViewW + interaciveW {
+                            close()
+                        } else {
+                            open()
+                        }
                     }
                 default: break
                 }
@@ -87,9 +104,7 @@ final class SideMenuView: UIView, CommonView {
     }
     
     func setupView() {
-        self.isHidden = true
-        leadingCont.constant = -frame.width
-        
+        leadingCont.constant = -sideViewW
         reloadView()
     }
     
@@ -110,8 +125,6 @@ final class SideMenuView: UIView, CommonView {
 extension SideMenuView {
     func open() {
         reloadView()
-        layer.removeAllAnimations()
-        self.isHidden = false
         self.leadingCont.constant = 0
         UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: { [weak self] in
             self?.layoutIfNeeded()
@@ -120,15 +133,10 @@ extension SideMenuView {
     }
     
     func close() {
-        layer.removeAllAnimations()
-        leadingCont.constant = -self.frame.width
+        leadingCont.constant = -self.sideViewW
         UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut, animations: { [weak self] in
             self?.layoutIfNeeded()
             self?.backgroundColor = UIColor.black.withAlphaComponent(0)
-        }, completion: { [weak self] (isComplete) in
-            if isComplete {
-                self?.isHidden = true
-            }
         })
     }
     
@@ -145,7 +153,7 @@ extension SideMenuView {
     }
 }
 
-//// MARK: - UICollectionViewDataSource
+// MARK: - UICollectionViewDataSource
 extension SideMenuView: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return viewModel.sections.count
@@ -157,5 +165,22 @@ extension SideMenuView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return viewModel.sections[indexPath.section].configureCell(collectionView: collectionView, indexPath: indexPath)
+    }
+}
+
+// MARK: - hitTest
+extension SideMenuView {
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let hitView = super.hitTest(point, with: event)
+        
+        if leadingCont.constant == 0 {
+            return hitView == collectionView ? collectionView : self
+        } else {
+            if point.x < interaciveW {
+                return self
+            } else {
+                return hitView == self ? nil : hitView
+            }
+        }
     }
 }

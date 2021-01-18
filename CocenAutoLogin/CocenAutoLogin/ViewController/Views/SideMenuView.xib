@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="AaO-VL-1TH">
+                <collectionView clipsSubviews="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="AaO-VL-1TH">
                     <rect key="frame" x="0.0" y="44" width="300" height="818"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
@@ -28,25 +28,16 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wxC-bC-gPP">
-                    <rect key="frame" x="300" y="44" width="114" height="818"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="wxC-bC-gPP" secondAttribute="trailing" id="6XD-cE-dZz"/>
                 <constraint firstItem="AaO-VL-1TH" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Bc1-2L-ilZ"/>
-                <constraint firstItem="wxC-bC-gPP" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="D5R-vW-MTA"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="wxC-bC-gPP" secondAttribute="bottom" id="iJa-rz-05d"/>
                 <constraint firstItem="AaO-VL-1TH" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="j3f-42-Boz"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="AaO-VL-1TH" secondAttribute="bottom" id="oBM-dX-Uxz"/>
-                <constraint firstItem="wxC-bC-gPP" firstAttribute="leading" secondItem="AaO-VL-1TH" secondAttribute="trailing" id="riI-yr-9sr"/>
             </constraints>
             <connections>
                 <outlet property="collectionView" destination="AaO-VL-1TH" id="VLS-IC-8PL"/>
                 <outlet property="leadingCont" destination="j3f-42-Boz" id="e67-Ma-z0R"/>
-                <outlet property="panGestureSpace" destination="wxC-bC-gPP" id="LGD-33-V0y"/>
             </connections>
             <point key="canvasLocation" x="-278" y="107"/>
         </view>

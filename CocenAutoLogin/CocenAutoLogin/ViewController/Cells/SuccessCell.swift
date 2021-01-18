@@ -9,10 +9,15 @@ import UIKit
 import Combine
 
 class SuccessCell: UICollectionViewCell {
+    @IBOutlet weak var titleLabel: UILabel!
     var retrySub: PassthroughSubject<Void, Never>?
     
     @IBAction func pressRetryBtn(_ sender: Any) {
         retrySub?.send()
+    }
+    
+    override func layoutSubviews() {
+        titleLabel.text = "완료되었습니다. (\(OQUserDefaults().string(forKey: .idKey)))"
     }
 }
 
