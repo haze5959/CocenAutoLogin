@@ -7,38 +7,66 @@
 
 import UIKit
 import WebKit
+import SystemConfiguration.CaptiveNetwork
+import Combine
 
 class WebViewCell: UICollectionViewCell {
     var webView: WKWebView?
     var process: WebProcess?
+    var reloadAction: (() -> Void)?
     
-    override func prepareForReuse() {
+    func cellWillAppear() {
         guard let webView = webView,
               let process = process else {
             return
         }
         
         webView.isUserInteractionEnabled = false
-        webView.frame = contentView.frame
+        webView.frame = self.bounds
         contentView.addSubview(webView)
         
         switch process {
         case .loadPage(let urlStr):
-            guard let url = URL(string: urlStr) else {
-                print("url host is nil!")
-                return
-            }
-            
-            let request = URLRequest(url: url)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                webView.load(request)
-            }
+            load(urlStr: urlStr, with: Constants.wifiSSID)
         case .script(let script):
-            webView.evaluateJavaScript(script) { (result, error) in
+            webView.evaluateJavaScript(script) { [self] (result, error) in
                 if let error = error {
                     print(error.localizedDescription)
+                    reloadAction?()
                 }
+            }
+        }
+    }
+    
+    func getWiFiSsid() -> String? {
+        var ssid: String?
+        if let interfaces = CNCopySupportedInterfaces() as NSArray? {
+            for interface in interfaces {
+                if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
+                    ssid = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String
+                    break
+                }
+            }
+        }
+        return ssid
+    }
+    
+    func load(urlStr: String, with wifi: String) {
+        guard let url = URL(string: urlStr) else {
+            print("url host is nil!")
+            reloadAction?()
+            return
+        }
+        
+        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringCacheData)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+            if let ssid = getWiFiSsid(),
+               ssid == wifi {
+                webView?.load(request)
+            } else {
+                print("wifi setting...")
+                reloadAction?()
             }
         }
     }
@@ -48,10 +76,12 @@ struct WebViewSection: Section {
     let numberOfItems = 1
     let process: WebProcess
     let webView: WKWebView
+    private let action: () -> Void
     
-    init(process: WebProcess, webView: WKWebView) {
+    init(process: WebProcess, webView: WKWebView, action: @escaping () -> Void) {
         self.process = process
         self.webView = webView
+        self.action = action
     }
     
     func layoutSection() -> NSCollectionLayoutSection {
@@ -69,6 +99,8 @@ struct WebViewSection: Section {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WebViewCell.self), for: indexPath) as! WebViewCell
         cell.webView = webView
         cell.process = process
+        cell.reloadAction = action
+        cell.cellWillAppear()
         return cell
     }
 }

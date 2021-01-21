@@ -16,8 +16,25 @@ class SuccessCell: UICollectionViewCell {
         retrySub?.send()
     }
     
+    @IBAction func pressOpenSetting(_ sender: Any) {
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+            return
+        }
+        
+        if UIApplication.shared.canOpenURL(settingsUrl) {
+            UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                print("Settings opened: \(success)") // Prints true
+            })
+        }
+    }
+    
     override func layoutSubviews() {
-        titleLabel.text = "완료되었습니다. (\(OQUserDefaults().string(forKey: .idKey)))"
+        var text = "완료되었습니다. (\(OQUserDefaults().string(forKey: .idKey)))"
+        if Constants.isConnectedInApp {
+            text += "\niOS 정책상 해당 앱에서 연결한 와이파이는 앱을 나가면 몇초후에 연결이 끊기게 됩니다."
+                + "\n설정으로 이동하셔서 다시 연결해주세요."
+        }
+        titleLabel.text = text
     }
 }
 

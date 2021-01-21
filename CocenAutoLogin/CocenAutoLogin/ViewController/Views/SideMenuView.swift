@@ -174,7 +174,7 @@ extension SideMenuView {
         let hitView = super.hitTest(point, with: event)
         
         if leadingCont.constant == 0 {
-            return hitView == collectionView ? collectionView : self
+            return hitView
         } else {
             if point.x < interaciveW {
                 return self

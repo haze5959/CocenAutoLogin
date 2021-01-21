@@ -15,6 +15,7 @@
 		C333C29D25B57CB40091F755 /* WebViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C333C29B25B57CB40091F755 /* WebViewCell.xib */; };
 		C333C2A025B57D240091F755 /* WebProcessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C333C29F25B57D240091F755 /* WebProcessModel.swift */; };
 		C333C2A325B58BFF0091F755 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C333C2A225B58BFF0091F755 /* ExternalAccessory.framework */; };
+		C367F1FF25B7C9C7006BE464 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C367F1FE25B7C9C7006BE464 /* Constants.swift */; };
 		C375D23325A6A7930094F473 /* ProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375D22925A6A7930094F473 /* ProgressCell.swift */; };
 		C375D23425A6A7940094F473 /* SuccessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375D22A25A6A7930094F473 /* SuccessCell.swift */; };
 		C375D23525A6A7940094F473 /* GuideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C375D22B25A6A7930094F473 /* GuideCell.xib */; };
@@ -57,6 +58,7 @@
 		C333C29B25B57CB40091F755 /* WebViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewCell.xib; sourceTree = "<group>"; };
 		C333C29F25B57D240091F755 /* WebProcessModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebProcessModel.swift; sourceTree = "<group>"; };
 		C333C2A225B58BFF0091F755 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
+		C367F1FE25B7C9C7006BE464 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C375D22925A6A7930094F473 /* ProgressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressCell.swift; sourceTree = "<group>"; };
 		C375D22A25A6A7930094F473 /* SuccessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessCell.swift; sourceTree = "<group>"; };
 		C375D22B25A6A7930094F473 /* GuideCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuideCell.xib; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				C3C198F72593405E007029E0 /* AppError.swift */,
 				C3C198E725932D8B007029E0 /* Protocols.swift */,
 				C313A918259B194800FC7A62 /* OQUserDefaults.swift */,
+				C367F1FE25B7C9C7006BE464 /* Constants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				C375D23825A6A7940094F473 /* GuideCell.swift in Sources */,
 				C313A919259B194800FC7A62 /* OQUserDefaults.swift in Sources */,
 				C3C198E825932D8B007029E0 /* Protocols.swift in Sources */,
+				C367F1FF25B7C9C7006BE464 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

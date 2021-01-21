@@ -17,10 +17,12 @@ class ProgressCell: UICollectionViewCell {
             switch process {
             case .connectWifi:
                 stepIndicatorView.currentStep = 0
-            case .loadAuthPage:
+            case .checkWifiWithNoInternet:
                 stepIndicatorView.currentStep = 1
-            case .auth:
+            case .loadAuthPage:
                 stepIndicatorView.currentStep = 2
+            case .auth:
+                stepIndicatorView.currentStep = 3
             default:
                 break
             }
