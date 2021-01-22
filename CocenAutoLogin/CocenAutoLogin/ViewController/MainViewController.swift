@@ -267,7 +267,7 @@ extension MainViewController: WKNavigationDelegate {
             }
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
-                if isSuccess {
+                if !isSuccess {
                     viewModel.input.appProcess.send(.failEtc(msg: "인증 페이지 로그인 실패\n아이디나 OTP 코드를 확인해주세요.", retryAction: { [self] in
                         startProcess()
                     }))
