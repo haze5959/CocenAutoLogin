@@ -18,6 +18,8 @@ final class MainViewController: UIViewController, CommonView {
     private lazy var viewModel = MainViewModel()
     private var cancellables = Set<AnyCancellable>()
     
+    private var isSuccess = false
+    
     lazy var barSettingBtn: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "gear"), for: .normal)
@@ -159,6 +161,7 @@ extension MainViewController {
     }
     
     func connectWifiView() {
+        isSuccess = false
         NEHotspotConfigurationManager.shared.removeConfiguration(forSSID: Constants.wifiSSID)
         let configuration = NEHotspotConfiguration.init(ssid: Constants.wifiSSID, passphrase: Constants.wifiPw, isWEP: false)
         configuration.joinOnce = false
@@ -213,7 +216,7 @@ extension MainViewController {
     }
     
     func successView() {
-        
+        isSuccess = true
     }
     
     private func getWiFiSsid() -> String? {
@@ -254,19 +257,21 @@ extension MainViewController: WKNavigationDelegate {
         if url.absoluteString.contains(Constants.pageValidationWord),
            Constants.wifiSSID == getWiFiSsid() {
             viewModel.input.appProcess.send(.success(retrySub: viewModel.input.retry))
+        } else if url.absoluteString.contains("fgtauth") {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+                viewModel.input.appProcess.send(.auth(webView: webView, retryAction: {
+                    viewModel.input.appProcess.send(.failEtc(msg: "인증 페이지 로그인 실패\n아이디나 OTP 코드를 확인해주세요.", retryAction: {
+                        startProcess()
+                    }))
+                }))
+            }
         } else {
-            if url.pathComponents.count > 1 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
-                    viewModel.input.appProcess.send(.auth(webView: webView, retryAction: {
-                        viewModel.input.appProcess.send(.failEtc(msg: "인증 페이지 로그인 실패\n아이디나 OTP 코드를 확인해주세요.", retryAction: {
-                            startProcess()
-                        }))
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
+                if isSuccess {
+                    viewModel.input.appProcess.send(.failEtc(msg: "인증 페이지 로그인 실패\n아이디나 OTP 코드를 확인해주세요.", retryAction: { [self] in
+                        startProcess()
                     }))
                 }
-            } else {
-                viewModel.input.appProcess.send(.failEtc(msg: "인증 페이지 로그인 실패\n아이디나 OTP 코드를 확인해주세요.", retryAction: { [self] in
-                    startProcess()
-                }))
             }
         }
     }
