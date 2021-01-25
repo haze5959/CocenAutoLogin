@@ -32,6 +32,8 @@ final class SideMenuView: UIView, CommonView {
                                      forCellWithReuseIdentifier: String(describing: DefaultCell.self))
         self.collectionView.register(UINib(nibName: String(describing: DefaultBtnCell.self), bundle: nil),
                                      forCellWithReuseIdentifier: String(describing: DefaultBtnCell.self))
+        self.collectionView.register(UINib(nibName: String(describing: DefaultSegmentCell.self), bundle: nil),
+                                     forCellWithReuseIdentifier: String(describing: DefaultSegmentCell.self))
         
         let output = viewModel.transform()
         output.layout
@@ -113,6 +115,9 @@ final class SideMenuView: UIView, CommonView {
            let otpKey = OQUserDefaults().object(forKey: .otpKey) as? String {
             viewModel.input.sideMenuState.send(.main(userId: userId,
                                                      otpKey: otpKey,
+                                                     reloadAction: { [weak self] in
+                                                        self?.delOtpKeySub?.send()
+                                                     },
                                                      removeInfoEvent: { [weak self] in
                                                         self?.viewModel.input.delOtpKey.send()
                                                      }))

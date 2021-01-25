@@ -145,6 +145,11 @@ final class MainViewController: UIViewController, CommonView {
         // OTP 키와 아이디가 저장 되어있다면 바로 연결 진행
         if !OQUserDefaults().string(forKey: .idKey).isEmpty,
            let key = OQUserDefaults().object(forKey: .otpKey) as? String {
+            if let wifiSSID = OQUserDefaults().object(forKey: .wifiKey) as? String,
+               !wifiSSID.isEmpty {
+                Constants.wifiSSID = wifiSSID
+            }
+            
             viewModel.input.optKey.send(key)
         } else {
             viewModel.input.appProcess.send(.initPage(submitSub: viewModel.input.userInfoSubmit))

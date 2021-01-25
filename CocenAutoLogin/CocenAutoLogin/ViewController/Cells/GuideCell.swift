@@ -12,6 +12,7 @@ class GuideCell: UICollectionViewCell {
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var otpTextField: UITextField!
+    @IBOutlet weak var wifiSegment: UISegmentedControl!
     
     var submitSub: PassthroughSubject<(id: String, optKey: String), Never>?
     
@@ -30,6 +31,17 @@ class GuideCell: UICollectionViewCell {
         guard otpKey.count == 16 else {
             titleLabel.text = "OTP Key는 16자리 입니다."
             return
+        }
+        
+        switch wifiSegment.selectedSegmentIndex {
+        case 0:
+            let wifi = "cocen_2g"
+            OQUserDefaults().setValue(wifi, forKey: .wifiKey)
+            Constants.wifiSSID = wifi
+        default:
+            let wifi = "cocen_5g"
+            OQUserDefaults().setValue(wifi, forKey: .wifiKey)
+            Constants.wifiSSID = wifi
         }
         
         submitSub?.send((idStr, otpKey))

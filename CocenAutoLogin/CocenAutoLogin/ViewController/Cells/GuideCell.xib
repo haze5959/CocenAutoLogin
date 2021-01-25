@@ -18,13 +18,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아이디와 OTP 키를 입력해주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmD-t4-Zoc">
-                        <rect key="frame" x="137" y="35.666666666666664" width="229" height="21"/>
+                        <rect key="frame" x="137" y="24" width="229" height="21"/>
                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="아이디" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R03-YV-u4k">
-                        <rect key="frame" x="126.66666666666669" y="75.333333333333329" width="250" height="34"/>
+                        <rect key="frame" x="126.66666666666669" y="64" width="250" height="34"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="250" id="sti-yh-1nj"/>
                         </constraints>
@@ -35,7 +35,7 @@
                         </connections>
                     </textField>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="OTP Key (16자리)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jiA-AT-EcX">
-                        <rect key="frame" x="126.66666666666669" y="121.66666666666669" width="250" height="34"/>
+                        <rect key="frame" x="126.66666666666669" y="110" width="250" height="34"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="250" id="U6J-mV-e8u"/>
                         </constraints>
@@ -46,8 +46,15 @@
                             <outlet property="textDropDelegate" destination="4Jy-U2-tk4" id="zqV-qg-VX0"/>
                         </connections>
                     </textField>
+                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rVg-eC-39t">
+                        <rect key="frame" x="171" y="157.66666666666666" width="161" height="32"/>
+                        <segments>
+                            <segment title="cocen_2g"/>
+                            <segment title="cocen_5g"/>
+                        </segments>
+                    </segmentedControl>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A9p-CX-Kye">
-                        <rect key="frame" x="201.66666666666666" y="169.66666666666666" width="99.999999999999972" height="30"/>
+                        <rect key="frame" x="201.66666666666666" y="193" width="99.999999999999972" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="3xu-qh-lcx"/>
                             <constraint firstAttribute="width" constant="100" id="QpF-58-ivU"/>
@@ -60,13 +67,15 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="jiA-AT-EcX" firstAttribute="centerX" secondItem="Tsq-iI-Pco" secondAttribute="centerX" id="5dJ-yq-nqA"/>
-                    <constraint firstItem="jiA-AT-EcX" firstAttribute="centerY" secondItem="Tsq-iI-Pco" secondAttribute="centerY" multiplier="1.2" id="Kit-Jy-4Y4"/>
-                    <constraint firstItem="R03-YV-u4k" firstAttribute="centerY" secondItem="Tsq-iI-Pco" secondAttribute="centerY" multiplier="0.8" id="XBY-NA-HyQ"/>
+                    <constraint firstItem="jiA-AT-EcX" firstAttribute="centerY" secondItem="Tsq-iI-Pco" secondAttribute="centerY" multiplier="1.1" id="Kit-Jy-4Y4"/>
+                    <constraint firstItem="R03-YV-u4k" firstAttribute="centerY" secondItem="Tsq-iI-Pco" secondAttribute="centerY" multiplier="0.7" id="XBY-NA-HyQ"/>
                     <constraint firstItem="wmD-t4-Zoc" firstAttribute="centerX" secondItem="Tsq-iI-Pco" secondAttribute="centerX" id="cbQ-uf-wNP"/>
-                    <constraint firstItem="wmD-t4-Zoc" firstAttribute="centerY" secondItem="Tsq-iI-Pco" secondAttribute="centerY" multiplier="0.4" id="ptw-Uw-gGd"/>
+                    <constraint firstItem="rVg-eC-39t" firstAttribute="centerY" secondItem="Tsq-iI-Pco" secondAttribute="centerY" multiplier="1.5" id="j3l-C0-kmD"/>
+                    <constraint firstItem="wmD-t4-Zoc" firstAttribute="centerY" secondItem="Tsq-iI-Pco" secondAttribute="centerY" multiplier="0.3" id="ptw-Uw-gGd"/>
                     <constraint firstItem="A9p-CX-Kye" firstAttribute="centerX" secondItem="Tsq-iI-Pco" secondAttribute="centerX" id="wQk-FN-Vtc"/>
                     <constraint firstItem="R03-YV-u4k" firstAttribute="centerX" secondItem="Tsq-iI-Pco" secondAttribute="centerX" id="wUV-f5-98K"/>
-                    <constraint firstItem="A9p-CX-Kye" firstAttribute="centerY" secondItem="Tsq-iI-Pco" secondAttribute="centerY" multiplier="1.6" id="ws9-JZ-HXU"/>
+                    <constraint firstItem="rVg-eC-39t" firstAttribute="centerX" secondItem="Tsq-iI-Pco" secondAttribute="centerX" id="whp-Zu-vbo"/>
+                    <constraint firstItem="A9p-CX-Kye" firstAttribute="centerY" secondItem="Tsq-iI-Pco" secondAttribute="centerY" multiplier="1.8" id="ws9-JZ-HXU"/>
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="503" height="231"/>
@@ -74,6 +83,7 @@
                 <outlet property="idTextField" destination="R03-YV-u4k" id="jfY-CM-dWQ"/>
                 <outlet property="otpTextField" destination="jiA-AT-EcX" id="mQw-Rc-mwc"/>
                 <outlet property="titleLabel" destination="wmD-t4-Zoc" id="IEH-kl-izK"/>
+                <outlet property="wifiSegment" destination="rVg-eC-39t" id="PFZ-Rk-fFn"/>
             </connections>
             <point key="canvasLocation" x="66.400000000000006" y="268.5960591133005"/>
         </collectionViewCell>

@@ -16,6 +16,8 @@
 		C333C2A025B57D240091F755 /* WebProcessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C333C29F25B57D240091F755 /* WebProcessModel.swift */; };
 		C333C2A325B58BFF0091F755 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C333C2A225B58BFF0091F755 /* ExternalAccessory.framework */; };
 		C367F1FF25B7C9C7006BE464 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C367F1FE25B7C9C7006BE464 /* Constants.swift */; };
+		C367F21B25BE7259006BE464 /* DefaultSegmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C367F21925BE7259006BE464 /* DefaultSegmentCell.swift */; };
+		C367F21C25BE7259006BE464 /* DefaultSegmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C367F21A25BE7259006BE464 /* DefaultSegmentCell.xib */; };
 		C375D23325A6A7930094F473 /* ProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375D22925A6A7930094F473 /* ProgressCell.swift */; };
 		C375D23425A6A7940094F473 /* SuccessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C375D22A25A6A7930094F473 /* SuccessCell.swift */; };
 		C375D23525A6A7940094F473 /* GuideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C375D22B25A6A7930094F473 /* GuideCell.xib */; };
@@ -59,6 +61,8 @@
 		C333C29F25B57D240091F755 /* WebProcessModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebProcessModel.swift; sourceTree = "<group>"; };
 		C333C2A225B58BFF0091F755 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		C367F1FE25B7C9C7006BE464 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C367F21925BE7259006BE464 /* DefaultSegmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultSegmentCell.swift; sourceTree = "<group>"; };
+		C367F21A25BE7259006BE464 /* DefaultSegmentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultSegmentCell.xib; sourceTree = "<group>"; };
 		C375D22925A6A7930094F473 /* ProgressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressCell.swift; sourceTree = "<group>"; };
 		C375D22A25A6A7930094F473 /* SuccessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessCell.swift; sourceTree = "<group>"; };
 		C375D22B25A6A7930094F473 /* GuideCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuideCell.xib; sourceTree = "<group>"; };
@@ -120,6 +124,8 @@
 		C375D22525A6A3C40094F473 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				C367F21925BE7259006BE464 /* DefaultSegmentCell.swift */,
+				C367F21A25BE7259006BE464 /* DefaultSegmentCell.xib */,
 				C333C29A25B57CB40091F755 /* WebViewCell.swift */,
 				C333C29B25B57CB40091F755 /* WebViewCell.xib */,
 				C333C22D25AEBCA70091F755 /* DefaultBtnCell.swift */,
@@ -309,6 +315,7 @@
 				C3C198BE2593196C007029E0 /* LaunchScreen.storyboard in Resources */,
 				C375D2C225AC1CDC0094F473 /* SideMenuView.xib in Resources */,
 				C3C198BB2593196C007029E0 /* Assets.xcassets in Resources */,
+				C367F21C25BE7259006BE464 /* DefaultSegmentCell.xib in Resources */,
 				C375D24125A6AA2A0094F473 /* OtpEtcCell.xib in Resources */,
 				C3C198B92593196A007029E0 /* Main.storyboard in Resources */,
 				C375D2D825AC35A70094F473 /* DefaultCell.xib in Resources */,
@@ -336,6 +343,7 @@
 				C375D2BD25AC14270094F473 /* OQ+UIControl.swift in Sources */,
 				C3C198B62593196A007029E0 /* MainViewController.swift in Sources */,
 				C333C22F25AEBCA70091F755 /* DefaultBtnCell.swift in Sources */,
+				C367F21B25BE7259006BE464 /* DefaultSegmentCell.swift in Sources */,
 				C375D2D925AC35A70094F473 /* DefaultCell.swift in Sources */,
 				C3C198F82593405E007029E0 /* AppError.swift in Sources */,
 				C3C198B22593196A007029E0 /* AppDelegate.swift in Sources */,
@@ -494,14 +502,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = CocenAutoLogin/CocenAutoLogin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z97K7ZHNKX;
+				DEVELOPMENT_TEAM = PUECPHWLNZ;
 				INFOPLIST_FILE = CocenAutoLogin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.oq.cocen.autologin.CocenAutoLogin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cocen.autoLogin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -515,14 +523,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = CocenAutoLogin/CocenAutoLogin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z97K7ZHNKX;
+				DEVELOPMENT_TEAM = PUECPHWLNZ;
 				INFOPLIST_FILE = CocenAutoLogin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.oq.cocen.autologin.CocenAutoLogin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cocen.autoLogin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DefaultSegmentCell" id="4Jy-U2-tk4" customClass="DefaultSegmentCell" customModule="CocenAutoLogin" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="503" height="231"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Tsq-iI-Pco">
+                <rect key="frame" x="0.0" y="0.0" width="503" height="231"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="SjC-zW-Kjp">
+                        <rect key="frame" x="10" y="10" width="483" height="212"/>
+                        <segments>
+                            <segment title="cocen_2g"/>
+                            <segment title="cocen_5g"/>
+                        </segments>
+                        <connections>
+                            <action selector="pressSegemt:" destination="4Jy-U2-tk4" eventType="valueChanged" id="RSS-pv-jrZ"/>
+                        </connections>
+                    </segmentedControl>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="SjC-zW-Kjp" firstAttribute="leading" secondItem="Tsq-iI-Pco" secondAttribute="leading" constant="10" id="QIj-NJ-goA"/>
+                    <constraint firstAttribute="trailing" secondItem="SjC-zW-Kjp" secondAttribute="trailing" constant="10" id="Rpu-dX-bif"/>
+                    <constraint firstItem="SjC-zW-Kjp" firstAttribute="top" secondItem="Tsq-iI-Pco" secondAttribute="top" constant="10" id="S8r-8t-u0o"/>
+                    <constraint firstAttribute="bottom" secondItem="SjC-zW-Kjp" secondAttribute="bottom" constant="10" id="ugG-QU-Nnn"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="503" height="231"/>
+            <connections>
+                <outlet property="wifiSegment" destination="SjC-zW-Kjp" id="UAZ-Kb-WC0"/>
+            </connections>
+            <point key="canvasLocation" x="66.400000000000006" y="268.5960591133005"/>
+        </collectionViewCell>
+    </objects>
+</document>
