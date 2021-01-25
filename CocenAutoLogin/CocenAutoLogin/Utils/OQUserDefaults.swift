@@ -12,6 +12,7 @@ final class OQUserDefaults {
     enum UserDefaultKey: String {
         case idKey = "IDKey.key"
         case otpKey = "OTPKey.key"
+        case wifiKey = "WIFI.key"
     }
     
     private let userDefaults = UserDefaults()

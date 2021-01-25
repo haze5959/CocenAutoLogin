@@ -32,6 +32,7 @@ class ProgressCell: UICollectionViewCell {
     }
     
     override func layoutSubviews() {
+        descLabel.alpha = 1.0
         UIView.animate(withDuration: 1.0,
                        delay: 0.0,
                        options: [.autoreverse ,.repeat],
@@ -42,6 +43,22 @@ class ProgressCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         stepIndicatorView.currentStep = 0
+        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIApplication.didEnterBackgroundNotification, object: nil)
+    }
+    
+    @objc func didBecomeActive() {
+        descLabel.alpha = 1.0
+        UIView.animate(withDuration: 1.0,
+                       delay: 0.0,
+                       options: [.autoreverse ,.repeat],
+                       animations: { [self] in
+                        descLabel.alpha = 0.2
+                       })
+    }
+    
+    @objc func willResignActive() {
+        descLabel.layer.removeAllAnimations()
     }
 }
 
