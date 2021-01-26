@@ -26,6 +26,12 @@ class DefaultSegmentCell: UICollectionViewCell {
         
         action?()
     }
+    
+    override func layoutSubviews() {
+        if let wifi = OQUserDefaults().object(forKey: .wifiKey) as? String {
+            wifiSegment.selectedSegmentIndex =  wifi == "cocen_2g" ? 0 : 1
+        }
+    }
 }
 
 struct DefaultSegmentSection: Section {

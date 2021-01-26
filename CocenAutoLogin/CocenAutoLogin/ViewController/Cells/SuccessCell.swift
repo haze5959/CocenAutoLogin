@@ -31,7 +31,8 @@ class SuccessCell: UICollectionViewCell {
     override func layoutSubviews() {
         var text = "완료되었습니다. (\(OQUserDefaults().string(forKey: .idKey)))"
         if Constants.isConnectedInApp {
-            text += "\niOS 정책상 해당 앱에서 연결한 와이파이는 앱을 나가면 몇초후에 연결이 끊기게 됩니다."
+            text += "\n유심폰의 경우(접속 가능한 망이 여러개 있는 경우)"
+                + "\niOS 정책상 해당 앱에서 자동연결 된 와이파이는 앱을 나가면 몇초후에 연결이 끊기게 됩니다."
                 + "\n설정으로 이동하셔서 다시 연결해주세요."
         }
         titleLabel.text = text

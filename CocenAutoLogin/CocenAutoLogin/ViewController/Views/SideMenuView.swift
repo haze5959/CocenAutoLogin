@@ -13,7 +13,7 @@ final class SideMenuView: UIView, CommonView {
     @IBOutlet private weak var leadingCont: NSLayoutConstraint!
     
     private let sideViewW: CGFloat = 300
-    private let interaciveW: CGFloat = 40
+    private let interactiveW: CGFloat = 40
     var delOtpKeySub: PassthroughSubject<Void, Never>?
     
     private var gestureBeginPos = CGPoint.zero
@@ -88,13 +88,13 @@ final class SideMenuView: UIView, CommonView {
                     panGesture.setTranslation(CGPoint.zero, in: view)
                 case .ended:
                     if gestureBeginPos.x < 0 {
-                        if leadingCont.constant > -interaciveW {
+                        if leadingCont.constant > -interactiveW {
                             open()
                         } else {
                             close()
                         }
                     } else {
-                        if leadingCont.constant < -sideViewW + interaciveW {
+                        if leadingCont.constant < -sideViewW + interactiveW {
                             close()
                         } else {
                             open()
@@ -181,7 +181,7 @@ extension SideMenuView {
         if leadingCont.constant == 0 {
             return hitView
         } else {
-            if point.x < interaciveW {
+            if point.x < interactiveW {
                 return self
             } else {
                 return hitView == self ? nil : hitView
