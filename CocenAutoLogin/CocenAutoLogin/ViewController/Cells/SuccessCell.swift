@@ -34,6 +34,7 @@ class SuccessCell: UICollectionViewCell {
             text += "\n유심폰의 경우(접속 가능한 망이 여러개 있는 경우)"
                 + "\niOS 정책상 해당 앱에서 자동연결 된 와이파이는 앱을 나가면 몇초후에 연결이 끊기게 됩니다."
                 + "\n설정으로 이동하셔서 다시 연결해주세요."
+                + "\n[테스트폰이라면 셀룰러를 끄고 좀 더 편리하게 사용하실 수 있습니다!]"
         }
         titleLabel.text = text
     }
